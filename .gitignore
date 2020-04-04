@@ -1,8 +1,11 @@
 # Eclipse
-.classpath
-.project
 .settings/
+*.project
+*.classpath
+.prefs
+*.prefs
 .metadata/
+.factorypath
  
 # Intellij
 .idea/
@@ -13,7 +16,5 @@
 .DS_Store
 
 # Maven
-log/
 target/
-/bin/
 
