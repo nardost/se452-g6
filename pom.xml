@@ -32,4 +32,35 @@
         </dependencies>
     </dependencyManagement>
 
+    <developers>
+        <developer>
+            <email>SCHIANG5@mail.depaul.edu</email>
+            <name>Allison Chiang</name>
+        </developer>
+        <developer>
+            <email>MDAVI139@mail.depaul.edu</email>
+            <name>Mark Davis</name>
+        </developer>
+        <developer>
+            <email>agnkubas@gmail.com</email>
+            <name>Agnieszka Kubas</name>
+        </developer>
+        <developer>
+            <email>machenmeng01@outlook.com</email>
+            <name>Chenmeng Ma</name>
+        </developer>
+        <developer>
+            <email>nikadas157@gmail.com</email>
+            <name>Brian Obmalay</name>
+            <url>https://github.com/brianfujiwara</url>
+            <id>brianfujiwara</id>
+        </developer>
+        <developer>
+            <email>nardos.tessema@gmail.com</email>
+            <name>Nardos Tessema</name>
+            <url>https://github.com/nardost</url>
+            <id>nardost</id>
+        </developer>
+    </developers>
+
 </project>
