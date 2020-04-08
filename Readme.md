@@ -1,7 +1,8 @@
 # SE452: OBJECT-ORIENTED ENTERPRISE COMPUTING
-## GROUP 8
+## GROUP 6
 ## TEAM MEMBERS
-1. Agnieszka Kubas (agnkubas@gmail.com)
-2. Chenmeng Ma (machenmeng01@outlook.com)
-3. Brian Obmalay (nikadas157@gmail.com)
-4. Nardos Tessema (nardos.tessema@gmail.com)
+1. Matthew James (MJAMES22@mail.depaul.edu)
+2. Christian Kleinvehn (CKLEINVE@mail.depaul.edu)
+3. Abhishek Ram Muthukrishnan (AMUTHUKR@mail.depaul.edu)
+4. Pedro Rebollar (PREBOLLA@mail.depaul.edu)
+5. Nardos Tessema (NTESSEMA@mail.depaul.edu)
