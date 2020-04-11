@@ -4,17 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.depaul.cdm.se452</groupId>
+    <groupId>edu.depaul.g6</groupId>
     <artifactId>g6-utilities</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>g6-utilities</name>
 
-    <properties>
-        <java.version>11</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
+    <modules>
+        <module>accounts</module>
+        <module>billing</module>
+        <module>facilities</module>
+        <module>on-premise-monitor-simulator</module>
+        <module>payment</module>
+        <module>payment-processor-simulator</module>
+        <module>service-delivery-and-monitoring</module>
+        <module>ui</module>
+    </modules>
 
     <developers>
         <developer>
