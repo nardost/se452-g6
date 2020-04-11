@@ -9,4 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <name>service-delivery-and-monitoring</name>
 
+    <parent>
+        <artifactId>g6-utilities</artifactId>
+        <groupId>edu.depaul.g6</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
 </project>

@@ -1,6 +1,8 @@
-# SE452: OBJECT-ORIENTED ENTERPRISE COMPUTING
-## GROUP 6
-## TEAM MEMBERS
+# G6 Utilities
+## A Utility Services Management & Billing System
+
+#### SE452: Object-Oriented Enterprise Computing
+### GROUP 6
 1. Matthew James (matthewmorelandjames@gmail.com)
 2. Christian Kleinvehn (ckleinvehn@gmail.com)
 3. Abhishek Ram Muthukrishnan (ram.abishek@gmail.com)
