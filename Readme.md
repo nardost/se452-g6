@@ -35,15 +35,16 @@ g6-utilities
    
    On Windows, open the command line tool and run:
     
-    ```
-   C:\> CD C:\Path\To\Project\Directory 
-   C:\Path\To\Project\Directory> SET SPRING_PROFILES_ACTIVE=dev```
+   ```
+   C:\> CD C:\Path\To\Project\Directory
+   C:\Path\To\Project\Directory> SET SPRING_PROFILES_ACTIVE=dev
+   ```
 
 3. Build
 
    ```$ mvn clean package```
 
-4. Execute thee jar file
+4. Execute the jar file
 
    ```$ java -jar ui/target/ui-1.0-SNAPSHOT.jar```
 
