@@ -5,6 +5,7 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css" />
     <link th:href="@{/styles/main.css}" rel="stylesheet" />
     <title th:inline="text">[[${applicationName}]]</title>
 </head>
@@ -20,30 +21,74 @@
             </h1>
             <hr class="g6-dark-gray">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">Home</a>
+                <a class="navbar-brand" href="/">
+                    <span style="font-size: 1.3em">
+                        <svg class="bi bi-lightning" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.251.068a.5.5 0 01.227.58L9.677 6.5H13a.5.5 0 01.364.843l-8 8.5a.5.5 0 01-.842-.49L6.323 9.5H3a.5.5 0 01-.364-.843l8-8.5a.5.5 0 01.615-.09zM4.157 8.5H7a.5.5 0 01.478.647L6.11 13.59l5.732-6.09H9a.5.5 0 01-.478-.647L9.89 2.41 4.157 8.5z" clip-rule="evenodd"/>
+                        </svg> G6 <span class="sr-only">(current)</span>
+                    </span>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Subscribe <span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-exclamation-triangle" style="color: red"></i> Outage
+                                </span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="#">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-file-invoice-dollar"></i> Pay Bill
+                                </span>
+                            </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Service Categories
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-house-user"></i> My Account
+                                </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Service Category A</a>
-                                <a class="dropdown-item" href="#">Service Category B</a>
-                                <a class="dropdown-item" href="#">Service Category C</a>
+                                <a class="dropdown-item" href="#">
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-id-card"></i> Profile
+                                    </span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-file-invoice-dollar"></i> Bill
+                                    </span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-tachometer-alt"></i> Usage
+                                    </span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-dolly"></i> Moving
+                                    </span>
+                                </a>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-laugh-beam" style="color: mediumorchid"></i> Subscribe
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-sign-in-alt"></i> Sign In
+                                </span>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -51,20 +96,87 @@
         </div>
     </header>
     <hr>
-    <div>
-        <img width="7   00px" src="images/model-diagram.png" />
+    <div class="text-center">
+        <img width="780px" src="images/model-diagram.png" />
     </div>
     <hr>
-    <!-- Footer -->
-    <footer class="page-footer font-small bg-light pt-4">
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="#"> G6 Utilities</a>
+    <footer class="page-footer font-small special-color-dark pt-4">
+        <div class="container text-center bg-light">
+            <div class="d-flex justify-content-center flex-row g6-md-green">
+                <div class="p-2">
+                    <svg class="bi bi-person-bounding-box" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <h4>Matthew James</h4>
+                </div>
+                <div class="p-2">
+                    <svg class="bi bi-person-bounding-box" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <h4>Christian Kleinvehn</h4>
+                </div>
+                <div class="p-2">
+                    <svg class="bi bi-person-bounding-box" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <h4>Pedro Rebollar</h4>
+                </div>
+                <div class="p-2">
+                    <svg class="bi bi-person-bounding-box" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <h4>Nardos Tessema</h4>
+                </div>
+                <div class="p-2">
+                    <svg class="bi bi-person-bounding-box" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <h4>Abhishek Ram</h4>
+                </div>
+            </div>
         </div>
-        <!-- Copyright -->
-
+        <div class="footer-copyright text-center bg-light">
+            <span>
+                <ul class="list-unstyled list-inline text-center">
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-fb mx-1 g6-lt-green" href="https://github.com/nardost/se452-g6">
+                            <span style="font-size: 3em">
+                                <i class="fab fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-tw mx-1 g6-lt-green" href="https://trello.com/b/CTdlbXdV/utility-service-management">
+                            <span style="font-size: 3em">
+                                <i class="fab fa-trello"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-gplus mx-1 g6-lt-green" href="https://se452-g6.slack.com/">
+                            <span style="font-size: 3em">
+                                <i class="fab fa-slack"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <div class="text-secondary text-center">
+            <small>
+                DePaul University <i class="fas fa-angle-double-right"></i>
+                CDM <i class="fas fa-angle-double-right"></i>
+                SE452 - Object-Oriented Enterprise Computing <i class="fas fa-angle-double-right"></i>
+                Spring 2020 <i class="fas fa-angle-double-right"></i>
+                Group 6
+            </small>
+        </div>
     </footer>
-    <!-- Footer -->
 </div>
 </body>
 </html>
