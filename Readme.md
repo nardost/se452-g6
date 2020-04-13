@@ -35,9 +35,10 @@ g6-utilities
    
    On Windows, open the command line tool and run:
     
-    ```
-   C:\> CD C:\Path\To\Project\Directory 
-   C:\Path\To\Project\Directory> SET SPRING_PROFILES_ACTIVE=dev```
+   ```
+   C:\> CD C:\Path\To\Project\Directory
+   C:\Path\To\Project\Directory> SET SPRING_PROFILES_ACTIVE=dev
+   ```
 
 3. Build
 
