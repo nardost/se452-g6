@@ -1,9 +1,15 @@
 .g6-dark-gray {
     color:#566573;
 }
-.g6-lt-green {
-    color: #A2D9CE;
+.g6-gray-1 {
+    color: lightslategray;
 }
-.g6-md-green {
-    color: #73C6B6;
+.g6-gray-2,
+a.g6-gray-2:active,
+a.g6-gray-2:visited {
+    color: lightslategray;
+}
+
+a.g6-gray-2:hover {
+    color: black;
 }
