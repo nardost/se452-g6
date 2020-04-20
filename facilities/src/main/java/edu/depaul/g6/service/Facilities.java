@@ -4,8 +4,8 @@ import edu.depaul.g6.domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class Facilities {
@@ -17,12 +17,11 @@ public class Facilities {
         this.locationService = locationService;
     }
 
-    public List<String> getAllServiceLocations() {
-        List<Location> locations = locationService.findAllLocations();
-        List<String> stringList = new ArrayList<>();
-        locations.forEach(location -> {
-            stringList.add(location.toString());
-        });
-        return stringList;
+    public List<String> getAllLocations() {
+        return locationService.getAllLocations().stream().map(Location::getStreetAddress).collect(Collectors.toList());
+    }
+
+    public List<String> getAllLocationsInZipCode(int zipCode) {
+        return locationService.getLocationsByZipCode(zipCode).stream().map(Location::getStreetAddress).collect(Collectors.toList());
     }
 }

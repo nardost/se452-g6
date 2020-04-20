@@ -18,7 +18,7 @@ public class FacilitiesController {
 
     @GetMapping("/locations")
     public String locations(Model model) {
-        model.addAttribute("locations", facilities.getAllServiceLocations());
+        model.addAttribute("locations", facilities.getAllLocationsInZipCode(60601));
         return "locations";
     }
 }

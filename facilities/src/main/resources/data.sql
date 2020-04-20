@@ -15,4 +15,5 @@ INSERT INTO service_locations (street_address, unit, city, state, zip_code) VALU
     ('100 W LAKE ST', '', 'Chicago', 'IL', 60601),
     ('1530 W FOSTER AVE', '', 'Chicago', 'IL', 60640),
     ('6000 N CLARK ST', '', 'Chicago', 'IL', 60660),
-    ('2000 W DEVON AVE', '', 'Chicago', 'IL', 60659);
+    ('2000 W DEVON AVE', '', 'Chicago', 'IL', 60659),
+    ('1031 W NORTH AVE', '', 'Chicago', 'IL', 60642);

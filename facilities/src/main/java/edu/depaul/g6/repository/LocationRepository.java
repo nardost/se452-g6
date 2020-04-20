@@ -1,7 +1,10 @@
 package edu.depaul.g6.repository;
 
 import edu.depaul.g6.domain.Location;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LocationRepository extends CrudRepository<Location, Integer> {
+import java.util.List;
+
+public interface LocationRepository extends JpaRepository<Location, Integer> {
+    List<Location> findAllByZipCode(int zipCode);
 }
