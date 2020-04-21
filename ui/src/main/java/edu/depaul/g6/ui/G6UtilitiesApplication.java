@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = { "edu.depaul.g6.service", "edu.depaul.g6.ui" })
 @EntityScan(basePackages = { "edu.depaul.g6.domain" })
 @EnableJpaRepositories(basePackages = { "edu.depaul.g6.repository" })
-public class UserInterfaceApplication {
+public class G6UtilitiesApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserInterfaceApplication.class, args);
+        SpringApplication.run(G6UtilitiesApplication.class, args);
     }
 }
