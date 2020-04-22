@@ -2,9 +2,9 @@ package edu.depaul.g6.accounts;
 
 public class Accounts {
 
-    public void accounts(){
+    public void createAcccount(){
         /*
-        Will return account information
+        This will create the initial profile for the user
         */
     }
     
