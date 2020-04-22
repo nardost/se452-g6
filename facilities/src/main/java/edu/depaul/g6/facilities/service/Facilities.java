@@ -1,6 +1,6 @@
-package edu.depaul.g6.service;
+package edu.depaul.g6.facilities.service;
 
-import edu.depaul.g6.domain.Location;
+import edu.depaul.g6.facilities.domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

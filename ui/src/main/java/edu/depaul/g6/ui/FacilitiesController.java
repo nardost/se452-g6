@@ -1,6 +1,6 @@
 package edu.depaul.g6.ui;
 
-import edu.depaul.g6.service.Facilities;
+import edu.depaul.g6.facilities.service.Facilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package edu.depaul.g6.repository;
+package edu.depaul.g6.facilities.repository;
 
-import edu.depaul.g6.domain.Location;
+import edu.depaul.g6.facilities.domain.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

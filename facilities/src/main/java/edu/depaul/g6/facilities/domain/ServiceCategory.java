@@ -1,4 +1,4 @@
-package edu.depaul.g6.domain;
+package edu.depaul.g6.facilities.domain;
 
 import lombok.Data;
 
