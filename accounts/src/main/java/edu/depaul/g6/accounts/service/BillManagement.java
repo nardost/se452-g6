@@ -1,4 +1,4 @@
-package edu.depaul.g6.accounts;
+package edu.depaul.g6.accounts.service;
 
 public class BillManagement {
 
