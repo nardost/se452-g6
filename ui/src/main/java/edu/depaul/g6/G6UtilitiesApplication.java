@@ -1,11 +1,11 @@
-package edu.depaul.g6.ui;
+package edu.depaul.g6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserInterfaceApplication {
+public class G6UtilitiesApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserInterfaceApplication.class, args);
+        SpringApplication.run(G6UtilitiesApplication.class, args);
     }
 }
