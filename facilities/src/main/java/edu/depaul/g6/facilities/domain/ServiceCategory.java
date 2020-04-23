@@ -1,15 +1,15 @@
 package edu.depaul.g6.facilities.domain;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 @Data
+@Document(collection = "service_categories")
 public class ServiceCategory {
     @Id
     private String id;
-    private String description;
+    private String category;
     private double tariff;
 }

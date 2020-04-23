@@ -1,6 +1,7 @@
 package edu.depaul.g6.facilities.service;
 
 import edu.depaul.g6.facilities.domain.Location;
+import edu.depaul.g6.facilities.domain.ServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,13 @@ import java.util.stream.Collectors;
 public class Facilities {
 
     private LocationService locationService;
+    private ServiceCategoryService serviceCategoryService;
 
     @Autowired
-    public Facilities(LocationService locationService) {
+    public Facilities(LocationService locationService,
+                      ServiceCategoryService serviceCategoryService) {
         this.locationService = locationService;
+        this.serviceCategoryService = serviceCategoryService;
     }
 
     public List<String> getAllLocations() {
@@ -23,5 +27,13 @@ public class Facilities {
 
     public List<String> getAllLocationsInZipCode(int zipCode) {
         return locationService.getLocationsByZipCode(zipCode).stream().map(Location::getStreetAddress).collect(Collectors.toList());
+    }
+
+    public ServiceCategory getCategory(String id) {
+        return serviceCategoryService.getCategory(id);
+    }
+
+    public List<ServiceCategory> getAllCategories() {
+        return serviceCategoryService.getAllCategories();
     }
 }
