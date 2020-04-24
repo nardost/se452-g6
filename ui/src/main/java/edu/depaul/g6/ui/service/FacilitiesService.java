@@ -1,6 +1,5 @@
 package edu.depaul.g6.ui.service;
 
-import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
 import edu.depaul.g6.facilities.service.Facilities;
 import org.springframework.beans.factory.annotation.Autowired;

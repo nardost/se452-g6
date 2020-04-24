@@ -15,7 +15,7 @@ class LocationService {
     private LocationRepository locationRepository;
 
     @Autowired
-    private LocationService(LocationRepository locationRepository) {
+    LocationService(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
 
