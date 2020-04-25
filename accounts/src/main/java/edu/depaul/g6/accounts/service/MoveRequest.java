@@ -1,5 +1,8 @@
 package edu.depaul.g6.accounts.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MoveRequest {
 
     public void moveRequest(){
