@@ -23,6 +23,7 @@ public class Accounts {
     };
 
     public void updateName(String newFullname){
+
         //user will update name in SQL database
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setName(newFullname);
@@ -42,6 +43,7 @@ public class Accounts {
         userProfile.setEmail(newEmail);
         userRepository.save(userProfile);
     }
+
 
     /*
     public void createAcccount(){

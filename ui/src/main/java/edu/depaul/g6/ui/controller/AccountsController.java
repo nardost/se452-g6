@@ -24,7 +24,10 @@ public class AccountsController {
     public String home(Model model) {
         model.addAttribute("applicationName", applicationName);
 
+<<<<<<< HEAD
         //Todo: Only 2 of the 3 updates can be called at once. 3/3 will result in error page
+=======
+>>>>>>> updated the accounts treee & created the updateUserName, updateEmail, updatPassword methods
         //Will update the name of user
         accounts.updateName("Ron Swanson");
 
@@ -32,8 +35,12 @@ public class AccountsController {
         accounts.updateEmail("newEmail123@gmail.com");
 
         //Will update the password
+<<<<<<< HEAD
         //accounts.updatePassword("newPassword123");
 
+=======
+        accounts.updatePassword("parksAndRec@gmail.com");
+>>>>>>> updated the accounts treee & created the updateUserName, updateEmail, updatPassword methods
         return "home";
     }
 }
