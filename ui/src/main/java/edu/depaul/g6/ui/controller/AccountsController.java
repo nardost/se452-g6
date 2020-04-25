@@ -23,6 +23,15 @@ public class AccountsController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("applicationName", applicationName);
+
+        //Will update the name of user
+        accounts.updateName("Ron Swanson");
+
+        //Will update the email of user
+        accounts.updateEmail("newEmail123@gmail.com");
+
+        //Will update the password
+        accounts.updatePassword("parksAndRec@gmail.com");
         return "home";
     }
 
