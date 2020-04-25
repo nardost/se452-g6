@@ -27,21 +27,21 @@ public class Accounts {
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setName(newFullname);
         userRepository.save(userProfile);
-    };
+    }
 
     public void updatePassword(String newPassword){
         //user will update password in SQL database
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setPassword(newPassword);
         userRepository.save(userProfile);
-    };
+    }
 
     public void updateEmail(String newEmail){
         //user will update password in SQL database
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setEmail(newEmail);
         userRepository.save(userProfile);
-    };
+    }
 
     /*
     public void createAcccount(){
