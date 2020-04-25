@@ -1,15 +1,28 @@
 package edu.depaul.g6.accounts.domain;
 
-public class UserProfile {
+import lombok.Data;
 
-    public void updateEmail(){
-        //user will update email in SQL database
+import javax.persistence.*;
+import java.io.Serializable;
 
-    };
+//@Table(name = "account_management")
+//@Data
+@Entity
+@Data
+@Table (name = "account_management")
+public class UserProfile implements Serializable {
 
-    public void updatePassword(){
-        //user will update password in SQL database
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    };
+    @Column(name = "full_name")
+    private String name;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
 
 }
