@@ -23,7 +23,7 @@ public class Accounts {
     };
 
     public void updateName(String newFullname){
-        //user will update email in SQL database
+        //user will update name in SQL database
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setName(newFullname);
         userRepository.save(userProfile);
@@ -37,7 +37,7 @@ public class Accounts {
     }
 
     public void updateEmail(String newEmail){
-        //user will update password in SQL database
+        //user will update email in SQL database
         UserProfile userProfile = userRepository.findByEmail("prebolla15@gmail.com");
         userProfile.setEmail(newEmail);
         userRepository.save(userProfile);
