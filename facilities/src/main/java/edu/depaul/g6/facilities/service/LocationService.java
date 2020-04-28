@@ -31,6 +31,6 @@ class LocationService {
     }
 
     List<Location> getLocationsByZipCode(int zipCode) {
-        return locationRepository.findAllByZipCode(zipCode);
+        return locationRepository.findByZipCode(zipCode);
     }
 }
