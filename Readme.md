@@ -28,15 +28,59 @@ g6-utilities
 
 1. Go to the project root directory
 
-2. Set the active profile via an environment variable
+2. Set environment variables
 
+    ## List of Environment Variables
+    ```
+     1. SPRING_PROFILES_ACTIVE
+     2. MONGODB_AUTHENTICATION_DB_LOCAL
+     3. MONGODB_HOST_LOCAL
+     4. MONGODB_PORT_LOCAL
+     5. MONGODB_DATABASE_LOCAL
+     6. MONGODB_USERNAME_LOCAL
+     7. MONGODB_PASSWORD_LOCAL
+     8. POSTGRES_URL_AWS
+     9. POSTGRES_PORT_AWS
+    10. POSTGRES_DB_AWS
+    11. POSTGRES_USERNAME_AWS
+    12. POSTGRES_PASSWORD_AWS
+    13. MONGODB_USERNAME_ATLAS
+    14. MONGODB_PASSWORD_ATLAS
+    15. MONGODB_CLUSTER_URI_ATLAS
+    ```
+
+   Examples:
+   
+   #### Setting them individually
+   
    ```$ export SPRING_PROFILES_ACTIVE=dev``` 
    
-   On Windows, open the command line tool and run:
+   In Windows, open the command line tool and run:
     
    ```
-   C:\> CD C:\Path\To\Project\Directory
    C:\Path\To\Project\Directory> SET SPRING_PROFILES_ACTIVE=dev
+   ```
+   
+   #### Using a configuration script (not added to source code repository)
+   
+   Create script file & export the env variables
+   
+   ```$ vim .config/config.sh```
+   
+   In Windows, create batch file & set the env variables: 
+   
+   ```C:\Path\To\Project\Directory>notepad .config\config.bat```
+   
+   Run script
+   
+   ```
+   $ source ./.config/config.sh
+   ```
+   
+   In Windows, run batch file
+   
+   ```
+   C:\Path\To\Project\Directory>.config\config.bat
    ```
 
 3. Build

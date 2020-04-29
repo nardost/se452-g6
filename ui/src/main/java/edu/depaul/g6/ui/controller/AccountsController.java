@@ -1,4 +1,4 @@
-package edu.depaul.g6.ui;
+package edu.depaul.g6.ui.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

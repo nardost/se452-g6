@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head-tag"></head>
+<body>
+<div th:replace="fragments :: banner-and-navbar" />
+<div class="container">
+    <h1 class="display-1" th:inline="text">[[${#lists.size(categories)}]] categories found.</h1>
+    <table class="table table-striped">
+        <tr><th>CATEGORY</th><th>TARIFF</th></tr>
+        <tr th:each="category, iStat : ${categories}">
+            <td th:text="${category.category}" />
+            <td th:inline="text">[[${category.tariff}]] USD/kWh</td>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments :: footer" />
+</body>
+</html>
