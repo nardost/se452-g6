@@ -41,6 +41,6 @@ public class Bill implements Serializable {
     /**
      * The paid status of the bill (true if paid, false if unpaid).
      */
-    @Column(name = "status", columnDefinition = "")
+    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean paidStatus;
 }

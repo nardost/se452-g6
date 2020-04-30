@@ -1,10 +1,8 @@
 package edu.depaul.g6.billing.repository;
 
-import java.util.List;
-import java.util.Date;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import edu.depaul.g6.billing.domain.Bill;
 
 
-public interface BillRepository extends PagingAndSortingRepository<Bill, Long> {
+public interface BillRepository extends JpaRepository<Bill, Long> {
 }
