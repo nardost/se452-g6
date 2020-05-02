@@ -1,2 +1,3 @@
-INSERT INTO Bill (billing_date, status) VALUES
-    (CURRENT_TIMESTAMP, TRUE);
+INSERT INTO Bill (utility_id) VALUES
+    ('util123'),
+    ('util321');

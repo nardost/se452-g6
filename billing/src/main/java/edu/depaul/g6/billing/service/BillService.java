@@ -17,7 +17,6 @@ public class BillService {
     BillService(BillRepository repo) {
         this.repo = repo;
     }
-
     public List<Bill> getAllBills() {
         return repo.findAll();
     }

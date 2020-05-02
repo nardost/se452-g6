@@ -13,3 +13,33 @@ a.g6-gray-2:visited {
 a.g6-gray-2:hover {
     color: black;
 }
+
+#home {
+    box-sizing: border-box;
+    border-left: 10px solid lightblue;
+    border-bottom: 10px solid black;
+    font-variant: small-caps;
+}
+
+#home a:link, #home a:visited, #home a:hover, #home a:active {
+    text-decoration: none;
+    color: black;
+}
+
+#home:hover {
+    opacity: .75;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-item i {
+    width: 30px;
+    padding-right: 10px;
+}
+
+
+#boltFilled {
+    display: none;
+}
