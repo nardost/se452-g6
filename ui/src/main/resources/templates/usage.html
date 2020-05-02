@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <div th:replace="fragments :: banner-and-navbar"></div>
+        <div class="container">
+            <h1 class="display-5" th:inline="text">[[${#lists.size(meters)}]] meter[[${#lists.size(meters) != 1 ? "s" : ""}]] found.</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Meter</th>
+                    <th>Usage Data</th>
+                </tr>
+                <tr th:each="meter : ${meters}">
+                    <td th:text="${meter.id}"></td>
+                    <td>
+                        <table style="display: inline-table;">
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>kWh Used</th>
+                            </tr>
+                            <tr th:each="usageData : ${meter.usage}">
+                                <td th:text="${usageData.timestamp}"></td>
+                                <td th:text="${usageData.kwhUsed}"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    </table>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="fragments :: footer"></div>
+    </body>
+</html>

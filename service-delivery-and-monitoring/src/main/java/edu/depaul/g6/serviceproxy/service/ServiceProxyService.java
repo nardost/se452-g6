@@ -18,10 +18,10 @@ public class ServiceProxyService {
         this.repo = repository;
     }
 
-    ServiceProxy getMeter(String id) {
+    public ServiceProxy getMeter(String id) {
         return repo.findById(id).get();
     }
-    List<ServiceProxy> getAllMeters() {
+    public List<ServiceProxy> getAllMeters() {
         return repo.findAll();
     }
 }
