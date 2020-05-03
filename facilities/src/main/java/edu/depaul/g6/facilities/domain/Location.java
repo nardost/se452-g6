@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Data
 @Table(name = "service_locations")
 public class Location implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -38,6 +39,7 @@ public class Location implements Serializable {
     @Column(name = "unit")
     private String unit;
 
-    @Column(name = "meter_mac_address")
+    @NotNull
+    @Column(name = "meter_mac_address", unique = true)
     private String meterMacAddress;
 }

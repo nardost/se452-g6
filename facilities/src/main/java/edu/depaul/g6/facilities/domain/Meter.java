@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 
-@Document(collection = "smart_meters")
 @Data
+@Document(collection = "smart_meters")
 public class Meter {
 
     @Id

@@ -1,5 +1,6 @@
 package edu.depaul.g6.ui.controller;
 
+import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.ui.service.FacilitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,5 +33,19 @@ public class FacilitiesController {
     public String serviceCategories(Model model) {
         model.addAttribute("categories", facilitiesService.getAllCategories());
         return "service-categories";
+    }
+
+    @GetMapping("/subscription")
+    public String subscription(@RequestParam String accountNumber, Model model) {
+        Subscription subscription = facilitiesService.getSubscription(accountNumber);
+        model.addAttribute("subscription", subscription);
+        return "subscription";
+    }
+
+    @GetMapping("/subscriptions")
+    public String subscriptions(Model model) {
+        List<Subscription> subscriptions = facilitiesService.getAllSubscriptions();
+        model.addAttribute("subscriptions", subscriptions);
+        return "subscriptions";
     }
 }

@@ -1,6 +1,7 @@
 package edu.depaul.g6.ui.service;
 
 import edu.depaul.g6.facilities.domain.ServiceCategory;
+import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.service.Facilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class FacilitiesService {
             locations = facilities.getAllLocationsInZipCode(zipCode);
         }
         return locations;
+    }
+
+    public Subscription getSubscription(String accountNumber) {
+        return facilities.getSubscription(accountNumber);
+    }
+
+    public List<Subscription> getAllSubscriptions() {
+        return facilities.getAllSubscriptions();
     }
 }

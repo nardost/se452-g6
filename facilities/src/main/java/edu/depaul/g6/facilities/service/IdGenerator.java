@@ -25,19 +25,33 @@ public class IdGenerator {
         byte[] digest = hash(string);
         String base64Encoded = byteArrayToBase64EncodedString(digest);
         String prefix = findFirstNAlpha(base64Encoded, PREFIX_LENGTH);
-        String currentTimeMillisHex = Long.toHexString(System.currentTimeMillis()).toUpperCase();
+        /**
+         * Alternative:
+         * String currentTimeMillisHex = Long.toHexString(System.currentTimeMillis()).toUpperCase();
+         */
+        String currentTimeMillisHex = Long.toString(System.currentTimeMillis()).toUpperCase();
         final int l = currentTimeMillisHex.length();
         String suffix = currentTimeMillisHex.substring(l - SUFFIX_LENGTH);
-        /*
-         * Check if the system has this number before returning it.
-         */
         return (prefix + suffix);
     }
 
+    /**
+     * Encode a byte array into base64 string.
+     *
+     * @param b byte array
+     * @return baes64 encoded string
+     */
     private String byteArrayToBase64EncodedString(byte[] b) {
         return Base64.getEncoder().encodeToString(b);
     }
 
+    /**
+     * Hash a string into a n array of bytes.
+     * HASHING_ALGORITHM could be MD5, SHA256, etc.
+     * @param s - the string to be digested
+     * @return the digest
+     * @throws NoSuchAlgorithmException
+     */
     private byte[] hash(String s) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(HASHING_ALGORITHM);
         return messageDigest.digest(s.getBytes());
