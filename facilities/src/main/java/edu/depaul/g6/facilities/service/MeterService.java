@@ -13,11 +13,11 @@ public class MeterService {
     private MeterRepository meterRepository;
 
     @Autowired
-    public MeterService(MeterRepository repository) {
+    MeterService(MeterRepository repository) {
         this.meterRepository = repository;
     }
 
-    public List<Meter> getAllMeters() {
+    List<Meter> getAllMeters() {
         return meterRepository.findAll();
     }
 }

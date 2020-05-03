@@ -1,8 +1,19 @@
-CREATE TABLE service_locations (
-    id SERIAL PRIMARY KEY,
-    street_address VARCHAR(255),
-    city VARCHAR(50),
-    state VARCHAR(2),
-    zip_code INTEGER,
-    unit VARCHAR(16)
+-- service locations
+create table service_locations (
+    id serial primary key,
+    street_address varchar(255),
+    city varchar(50),
+    state varchar(2),
+    zip_code integer,
+    unit varchar(16),
+    meter_mac_address varchar(20)
+);
+
+-- subscriptions
+create table subscriptions (
+    id varchar(10) primary key,
+    location_id integer references service_locations,
+    service_category varchar(20),
+    activation_timestamp timestamp,
+    service_status varchar(10)
 );

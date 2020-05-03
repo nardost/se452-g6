@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head-tag"></head>
+<body>
+<div th:replace="fragments :: banner-and-navbar" />
+<div class="container">
+    <h1 class="display-1" th:inline="text">[[${#lists.size(subscriptions)}]] subscriptions found.</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Account #</th>
+            <th>Service Status</th>
+            <th>Activation Timestamp</th>
+        </tr>
+        <tr th:each="subscription, iStat : ${subscriptions}">
+            <td th:text="${subscription.id}" />
+            <td th:text="${subscription.serviceStatus}" />
+            <td th:text="${subscription.activationTimeStamp}" />
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments :: footer" />
+</body>
+</html>
