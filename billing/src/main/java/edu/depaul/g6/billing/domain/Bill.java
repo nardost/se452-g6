@@ -34,7 +34,7 @@ public class Bill implements Serializable {
     /**
      * The corresponding utility associated with the bill.
      */
-    @Column(name = "utility_id", nullable = false)
+    @Column(name = "account_number", nullable = false)
     private String utilityId;
 
 
