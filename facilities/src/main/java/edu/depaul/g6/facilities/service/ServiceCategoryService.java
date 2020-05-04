@@ -18,7 +18,7 @@ public class ServiceCategoryService {
     }
 
     ServiceCategory getCategory(String id) {
-        return serviceCategoryRepository.findById(id).orElse(null);
+        return serviceCategoryRepository.findById(id).get();
     }
 
     List<ServiceCategory> getAllCategories() {
