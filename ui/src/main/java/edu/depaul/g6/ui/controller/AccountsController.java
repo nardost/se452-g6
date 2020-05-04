@@ -20,4 +20,10 @@ public class AccountsController {
         this.accounts = accounts;
     }
 
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("applicationName", applicationName);
+        return "home";
+    }
+
 }
