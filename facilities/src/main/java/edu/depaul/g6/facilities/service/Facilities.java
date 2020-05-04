@@ -2,6 +2,7 @@ package edu.depaul.g6.facilities.service;
 
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
+import edu.depaul.g6.facilities.domain.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,15 @@ public class Facilities {
 
     private LocationService locationService;
     private ServiceCategoryService serviceCategoryService;
+    private SubscriptionService subscriptionService;
 
     @Autowired
     public Facilities(LocationService locationService,
-                      ServiceCategoryService serviceCategoryService) {
+                      ServiceCategoryService serviceCategoryService,
+                      SubscriptionService subscriptionService) {
         this.locationService = locationService;
         this.serviceCategoryService = serviceCategoryService;
+        this.subscriptionService = subscriptionService;
     }
 
     public List<String> getAllLocations() {
@@ -35,5 +39,13 @@ public class Facilities {
 
     public List<ServiceCategory> getAllCategories() {
         return serviceCategoryService.getAllCategories();
+    }
+
+    public Subscription getSubscription(String accountNumber) {
+        return subscriptionService.getSubscription(accountNumber);
+    }
+
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionService.getAllSubscriptions();
     }
 }
