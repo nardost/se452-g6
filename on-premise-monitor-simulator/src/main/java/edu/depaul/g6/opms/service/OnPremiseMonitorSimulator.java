@@ -1,7 +1,12 @@
+package edu.depaul.g6.opms.service;
+
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+
 import java.util.Random;
 
-public class OnPremiseMonitorSimulator
-{
+public class OnPremiseMonitorSimulator {
+
+
     public float getSimulatedEnergyUsage()
     {
         float usedEnergy = 0;
@@ -11,5 +16,5 @@ public class OnPremiseMonitorSimulator
 
         return usedEnergy;
     }
-
 }
+
