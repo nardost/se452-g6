@@ -8,15 +8,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 
+/**
+ * A document which embeds all tracked meters and their respective usages.
+ *
+ * @author Christian Kleinvehn
+ */
 @Data
-@Document(collection = "utility_monitor")
+@Document(collection = "meter_usage")
 public class ServiceProxy {
     @Id
     private String id;
     List<Usage> usage;
 
     /*
-        id: (String),
+        _id: (String),
         usage: [
             { timestamp: (ISODate), kwhUsed: (Integer) },
             { timestamp: (ISODate), kwhused: (Integer) },
@@ -29,7 +34,9 @@ public class ServiceProxy {
 
 
 /**
- * A document representing the accumulated kWh for the meter at a specific point in time.
+ * A document representing the accumulated kWh for a meter at a specific point in time.
+ *
+ * @author Christian Kleinvehn
  */
 @Data
 class Usage {

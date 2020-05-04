@@ -10,6 +10,5 @@ import javax.persistence.Id;
 public class ServiceCategory {
     @Id
     private String id;
-    private String category;
     private double tariff;
 }
