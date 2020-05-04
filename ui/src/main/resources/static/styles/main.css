@@ -16,6 +16,7 @@ a.g6-gray-2:hover {
 
 #home {
     box-sizing: border-box;
+    border-left: 0px solid white;
     border-left: 0px solid lightblue;
     border-bottom: 0px solid black;
     font-variant: small-caps;
