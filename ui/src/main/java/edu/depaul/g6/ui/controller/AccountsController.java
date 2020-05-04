@@ -20,25 +20,4 @@ public class AccountsController {
         this.accounts = accounts;
     }
 
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("applicationName", applicationName);
-
-        //Todo: Only 2 of the 3 updates can be called at once. 3/3 will result in error page
-
-        //Todo: Only 2 of the 3 updates can be called at once. 3/3 will result in error page
-
-        //Will update the name of user
-        accounts.updateName("Ron Swanson");
-
-        //Will update the email of user
-        accounts.updateEmail("newEmail123@gmail.com");
-
-        //Will update the password
-
-        //accounts.updatePassword("newPassword123");
-
-        accounts.updatePassword("parksAndRec@gmail.com");
-        return "home";
-    }
 }
