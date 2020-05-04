@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <div th:replace="fragments :: banner-and-navbar"></div>
+        <div class="container">
+            <h1 class="display-5" th:inline="text">[[${#lists.size(bills)}]] bill[[${#lists.size(bills) != 1 ? "s" : ""}]] found.</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Associated Utility</th>
+                    <th>Issue Date</th>
+                    <th>Paid?</th>
+                </tr>
+                <tr th:each="bill : ${bills}">
+                    <td th:text="${bill.id}"></td>
+                    <td th:text="${bill.utilityId}"></td>
+                    <td th:text="${bill.billingDate}"></td>
+                    <td th:text="${bill.paidStatus ? 'Yes' : 'No'}"></td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="fragments :: footer"></div>
+    </body>
+</html>
