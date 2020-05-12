@@ -1,4 +1,4 @@
-INSERT INTO past_payments (customer_id, balance, credit_card_num) VALUES
+INSERT INTO past_payments (customer_id, amount_paid, credit_card_num) VALUES
     (1234, 50, '0000000000000000'),
     (1111, 100, '1111111111111111'),
     (2222, 20, '1111111111111111'),
