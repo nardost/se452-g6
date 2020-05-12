@@ -1,5 +1,6 @@
 package edu.depaul.g6.ui.service;
 
+import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.service.Facilities;
@@ -22,14 +23,8 @@ public class FacilitiesService {
         return facilities.getAllCategories();
     }
 
-    public List<String> getLocations(Integer zipCode) {
-        List<String> locations;
-        if(zipCode == null) {
-            locations = facilities.getAllLocations();
-        } else {
-            locations = facilities.getAllLocationsInZipCode(zipCode);
-        }
-        return locations;
+    public List<Location> getLocations(Integer zipCode) {
+        return (zipCode == null) ? facilities.getAllLocations() : facilities.getAllLocationsInZipCode(zipCode);
     }
 
     public Subscription getSubscription(String accountNumber) {

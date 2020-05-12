@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author nardos
+ *
+ * This class is is the Façade into the
+ * facilities module. It should be the only
+ * way other modules access facilities functionalities.
+ */
 @Service
 public class Facilities {
 
@@ -17,20 +24,26 @@ public class Facilities {
     private SubscriptionService subscriptionService;
 
     @Autowired
-    public Facilities(LocationService locationService,
-                      ServiceCategoryService serviceCategoryService,
-                      SubscriptionService subscriptionService) {
-        this.locationService = locationService;
-        this.serviceCategoryService = serviceCategoryService;
-        this.subscriptionService = subscriptionService;
+    public void setLocationService(LocationService service) {
+        this.locationService = service;
     }
 
-    public List<String> getAllLocations() {
-        return locationService.getAllLocations().stream().map(Location::getStreetAddress).collect(Collectors.toList());
+    @Autowired
+    public void setServiceCategoryService(ServiceCategoryService service) {
+        this.serviceCategoryService = service;
     }
 
-    public List<String> getAllLocationsInZipCode(int zipCode) {
-        return locationService.getLocationsByZipCode(zipCode).stream().map(Location::getStreetAddress).collect(Collectors.toList());
+    @Autowired
+    public void setSubscriptionService(SubscriptionService service) {
+        this.subscriptionService = service;
+    }
+
+    public List<Location> getAllLocations() {
+        return locationService.getAllLocations();//.stream();.map(Location::getStreetAddress).collect(Collectors.toList());
+    }
+
+    public List<Location> getAllLocationsInZipCode(int zipCode) {
+        return locationService.getLocationsByZipCode(zipCode);//.stream().map(Location::getStreetAddress).collect(Collectors.toList());
     }
 
     public ServiceCategory getCategory(String id) {

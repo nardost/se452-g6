@@ -1,4 +1,4 @@
-package edu.depaul.g6.facilities.service;
+package edu.depaul.g6.commons;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,8 @@ public class IdGenerator {
 
     /**
      * Generate unique account number based on input string.
+     *
+     * The input string may be user detail such as email.
      *
      * @param string - can be input representing subscriber
      * @return unique account number
@@ -82,6 +84,8 @@ public class IdGenerator {
 
     /**
      * Find the first n alphabetic characters of input string.
+     * Base64 ecoded strings may include the '+' and the '/'
+     * characters, which we don't want see in an id string.
      */
     private String findFirstNAlpha(String s, int n) {
         final int A = 0x41;

@@ -1,5 +1,6 @@
 package edu.depaul.g6.ui.controller;
 
+import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.ui.service.FacilitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class FacilitiesController {
     @GetMapping("/locations")
     public String locations(@RequestParam(required = false) Integer zipCode,  Model model) {
 
-        List<String> locations = facilitiesService.getLocations(zipCode);
+        List<Location> locations = facilitiesService.getLocations(zipCode);
 
         model.addAttribute("locations", locations);
         return "locations";
