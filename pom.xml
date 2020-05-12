@@ -26,6 +26,7 @@
         <module>payment-processor-simulator</module>
         <module>service-delivery-and-monitoring</module>
         <module>ui</module>
+        <module>commons</module>
     </modules>
 
     <properties>
