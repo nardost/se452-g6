@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author nardos
@@ -39,11 +38,11 @@ public class Facilities {
     }
 
     public List<Location> getAllLocations() {
-        return locationService.getAllLocations();//.stream();.map(Location::getStreetAddress).collect(Collectors.toList());
+        return locationService.getAllLocations();
     }
 
     public List<Location> getAllLocationsInZipCode(int zipCode) {
-        return locationService.getLocationsByZipCode(zipCode);//.stream().map(Location::getStreetAddress).collect(Collectors.toList());
+        return locationService.getLocationsByZipCode(zipCode);
     }
 
     public ServiceCategory getCategory(String id) {
