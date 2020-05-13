@@ -1,10 +1,14 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.facilities.ServiceStatus;
 import edu.depaul.g6.facilities.domain.Subscription;
+import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -12,7 +16,7 @@ import java.util.stream.StreamSupport;
 @Service
 public class SubscriptionService {
 
-    private SubscriptionRepository subscriptionRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
     @Autowired
     SubscriptionService(SubscriptionRepository repository) {
@@ -25,5 +29,15 @@ public class SubscriptionService {
 
     List<Subscription> getAllSubscriptions() {
         return StreamSupport.stream(subscriptionRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
+    void saveSubscription(String accountNumber, Location location, String category) {
+        Subscription subscription = new Subscription();
+        subscription.setId(accountNumber);
+        subscription.setLocation(location);
+        subscription.setServiceCategory(category);
+        subscription.setActivationTimeStamp(Timestamp.from(Instant.now()));
+        subscription.setServiceStatus(ServiceStatus.ACTIVATED);
+        subscriptionRepository.save(subscription);
     }
 }

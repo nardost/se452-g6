@@ -27,8 +27,8 @@ public class Subscription implements Serializable {
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "location_id")
-    private Location locationId;
+    @JoinColumn(name = "location")
+    private Location location;
 
     @Column(name = "service_category")
     @NotNull

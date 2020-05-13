@@ -1,8 +1,8 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
-import edu.depaul.g6.facilities.domain.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +35,12 @@ public class Facilities {
     @Autowired
     public void setSubscriptionService(SubscriptionService service) {
         this.subscriptionService = service;
+    }
+
+    public void activateService(String accountNumber,
+                                Location location,
+                                String category) {
+        subscriptionService.saveSubscription(accountNumber, location, category);
     }
 
     public List<Location> getAllLocations() {
