@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author nardos
@@ -65,5 +67,15 @@ public class Facilities {
 
     public List<Subscription> getAllSubscriptions() {
         return subscriptionService.getAllSubscriptions();
+    }
+
+    /**
+     * This could go into a database. But for the time being,
+     * it won't hurt to hard code the list of served states.
+     * The list grows as the business grows.
+     */
+    public List<String> getStatesServed() {
+        final String[] STATES_SERVED = new String[] { "IL", "IN", "WI" };
+        return Stream.of(STATES_SERVED).collect(Collectors.toList());
     }
 }

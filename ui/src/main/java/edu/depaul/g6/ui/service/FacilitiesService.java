@@ -40,4 +40,8 @@ public class FacilitiesService {
     public List<Subscription> getAllSubscriptions() {
         return facilities.getAllSubscriptions();
     }
+
+    public List<String> getServiceStates() {
+        return facilities.getStatesServed();
+    }
 }

@@ -73,6 +73,7 @@ public class FacilitiesController {
             categories.add(c.getCategory());
         });
         model.addAttribute("categories", categories);
+        model.addAttribute("states", facilitiesService.getServiceStates());
         return "subscribe";
     }
 
