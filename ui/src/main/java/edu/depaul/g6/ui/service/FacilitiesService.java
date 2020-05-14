@@ -12,11 +12,17 @@ import java.util.List;
 @Service
 public class FacilitiesService {
 
-    private Facilities facilities;
+    private final Facilities facilities;
 
     @Autowired
     public FacilitiesService(Facilities facilities) {
         this.facilities = facilities;
+    }
+
+    public void activateService(String accountNumber,
+                                Location location,
+                                String category) {
+        facilities.activateService(accountNumber, location, category);
     }
 
     public List<ServiceCategory> getAllCategories() {
