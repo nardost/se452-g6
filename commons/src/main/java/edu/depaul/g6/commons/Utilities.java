@@ -1,5 +1,8 @@
 package edu.depaul.g6.commons;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -10,7 +13,22 @@ import java.util.Random;
 @Service
 public class Utilities {
 
+    private BCryptPasswordEncoder passwordEncoder;
     private static final String HASHING_ALGORITHM = "MD5";
+
+    @Bean
+    public BCryptPasswordEncoder PasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void setPasswordEncoder(BCryptPasswordEncoder encoder) {
+        this.passwordEncoder = encoder;
+    }
+
+    public String encodePassword(String plain) {
+        return this.passwordEncoder.encode(plain);
+    }
 
     /**
      * Generate unique account number based on input string.
