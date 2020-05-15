@@ -1,5 +1,7 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.commons.IdGenerator;
+import edu.depaul.g6.facilities.domain.Account;
 import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
@@ -7,6 +9,7 @@ import edu.depaul.g6.facilities.domain.ServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,7 +27,6 @@ public class Facilities {
     private LocationService locationService;
     private ServiceCategoryService serviceCategoryService;
     private SubscriptionService subscriptionService;
-    private SubscriberService subscriberService;
 
     @Autowired
     public void setLocationService(LocationService service) {
@@ -39,11 +41,6 @@ public class Facilities {
     @Autowired
     public void setSubscriptionService(SubscriptionService service) {
         this.subscriptionService = service;
-    }
-
-    @Autowired
-    public void setSubscriberService(SubscriberService service) {
-        this.subscriberService = service;
     }
 
     /**
@@ -65,6 +62,10 @@ public class Facilities {
 
     public List<Location> getAllLocationsInZipCode(int zipCode) {
         return locationService.getLocationsByZipCode(zipCode);
+    }
+
+    public List<Location> getLocations(Integer zipCode) {
+        return (zipCode == null) ? getAllLocations() : getAllLocationsInZipCode(zipCode);
     }
 
     public ServiceCategory getCategory(String id) {
@@ -93,10 +94,18 @@ public class Facilities {
         return Stream.of(STATES_SERVED).collect(Collectors.toList());
     }
 
-    /**
-     * This should move to accounts.
-     */
-    public void saveSubscriber(Subscriber subscriber) {
-        subscriberService.saveSubscriber(subscriber);
+    //TODO This will move out into accounts
+    private SubscriberService subscriberService;
+
+    //TODO This will move out into accounts
+    @Autowired
+    public void setSubscriberService(SubscriberService service) {
+        this.subscriberService = service;
     }
+
+    //TODO This will move out into accounts
+    public String saveSubscriber(Subscriber s) throws NoSuchAlgorithmException {
+        return subscriberService.saveSubscriber(s);
+    }
+
 }
