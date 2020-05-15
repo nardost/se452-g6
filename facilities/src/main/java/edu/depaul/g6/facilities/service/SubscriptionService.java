@@ -1,9 +1,11 @@
 package edu.depaul.g6.facilities.service;
 
 import edu.depaul.g6.facilities.ServiceStatus;
+import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.repository.SubscriptionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,20 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
+@Slf4j
 public class SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
+    private LocationService locationService;
 
     @Autowired
     SubscriptionService(SubscriptionRepository repository) {
         this.subscriptionRepository = repository;
+    }
+
+    @Autowired
+    void setLocationService(LocationService service) {
+        this.locationService = service;
     }
 
     Subscription getSubscription(String accountNumber) {
@@ -31,13 +40,74 @@ public class SubscriptionService {
         return StreamSupport.stream(subscriptionRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
-    void saveSubscription(String accountNumber, Location location, String category) {
-        Subscription subscription = new Subscription();
-        subscription.setId(accountNumber);
-        subscription.setLocation(location);
-        subscription.setServiceCategory(category);
-        subscription.setActivationTimeStamp(Timestamp.from(Instant.now()));
-        subscription.setServiceStatus(ServiceStatus.ACTIVATED);
+    void saveSubscription(Subscription subscription) {
         subscriptionRepository.save(subscription);
+    }
+
+    /**
+     *
+     */
+    void activateService(Subscriber subscriber) {
+        /*
+         * Create a Location object and set its fields.
+         */
+        final String streetAddress = subscriber.getStreetAddress();
+        final String unit = subscriber.getUnit();
+        final String city = subscriber.getCity();
+        final String state = subscriber.getState();
+        final int zipCode = subscriber.getZipCode();
+        final String locationString = streetAddress + unit + city + state + zipCode;
+        /*
+         * hashCode is supposed to be unique.
+         */
+        final int id = locationString.hashCode();
+        /*
+         * What is the MAC address of the smart meter
+         * installed at the location? Get is from the
+         * MeterService.
+         */
+        final String MAC_ADDRESS = "xxxxyyyyzzzzaaaabbbb";
+        Location location = new Location();
+        location.setId(id);
+        location.setStreetAddress(streetAddress);
+        location.setUnit(unit);
+        location.setCity(city);
+        location.setState(state);
+        location.setZipCode(zipCode);
+        location.setMeterMacAddress(MAC_ADDRESS);
+
+        /*
+         * If the location is already in our database, what should we do?
+         * (1) Check if there is active subscription at location
+         *     (1.1) Proceed normally if there is no active subscription.
+         *     (1.2) If there is active subscription, mark the subscription
+         *           as invalid.
+         */
+        ServiceStatus status;
+        if(locationService.getLocationById(location.getId()) == null) {
+            /*
+             * Save location - There is a reference to it
+             * in Subscription, so the location must exist
+             * before the subscription can be persisted.
+             */
+            locationService.saveLocation(location);
+            status = ServiceStatus.ACTIVATED;
+        } else {
+            status = ServiceStatus.INVALID;
+            log.info("Location exists: " + location.getStreetAddress());
+        }
+
+        /*
+         * Construct a Subscription object
+         * and hand it over to SubscriptionService.
+         */
+        Subscription subscription = new Subscription();
+        subscription.setId(subscriber.getId());
+        subscription.setLocation(location);
+        subscription.setServiceCategory(subscriber.getServiceType());
+        subscription.setActivationTimeStamp(Timestamp.from(Instant.now()));
+        subscription.setServiceStatus(status);
+
+        saveSubscription(subscription);
     }
 }

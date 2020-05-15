@@ -5,51 +5,51 @@
 <div th:replace="fragments :: banner-and-navbar" />
 <div class="container">
     <div class="col-lg-9">
-        <h3 class="">Subscription Form</h3>
-        <form class="" method="post" th:action="@{/subscribe-fake}">
+        <h1 class="display-4">New Customer Subscription Form</h1>
+        <form class="" method="post" th:action="@{/subscribe-fake}" th:object="${subscriber}">
             <fieldset class="form-group">
                 <legend>Subscriber Information</legend>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
                         <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="First Name" required />
+                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name" required />
                     </div>
                     <div class="col-md-4 mb-3">
                         <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" required />
+                        <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name" required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-8 mb-3">
                         <label>Email</label>
-                        <input type="text" class="form-control" placeholder="Email" required />
+                        <input type="text" class="form-control" th:field="*{email}" placeholder="Email" required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-8 mb-3">
                         <label>Street Address</label>
-                        <input type="text" class="form-control" placeholder="Street Address" required />
+                        <input type="text" class="form-control" th:field="*{streetAddress}" placeholder="Street Address" required />
                     </div>
                     <div class="col-md-2 mb-3">
                         <label>Apt./Ste./Unit</label>
-                        <input type="text" class="form-control" placeholder="#" />
+                        <input type="text" class="form-control" th:field="*{unit}" placeholder="#" />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label>City</label>
-                        <input type="text" class="form-control" placeholder="City" required />
+                        <input type="text" class="form-control" th:field="*{city}" placeholder="City" required />
                     </div>
                     <div class="col-mb-3 mb-3">
                         <label>State</label>
-                        <select class="form-control" required>
+                        <select class="form-control" th:field="*{state}" required>
                             <option value=""></option>
-                            <option  th:each="state : ${states}" th:value="${state}" th:inline="text">[[${state}]]</option>
+                            <option th:each="state : ${states}" th:value="${state}" th:inline="text">[[${state}]]</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label>Zip Code</label>
-                        <input type="text" class="form-control" placeholder="Zip Code" required />
+                        <input type="text" class="form-control" th:field="*{zipCode}" placeholder="Zip Code" required />
                     </div>
                 </div>
             </fieldset>
@@ -61,13 +61,13 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label> Credit Card Number</label>
-                        <input class="form-control mb-3" type="text" placeholder="1234567890987654" pattern="[0-9]{16}" title="Credit Card Number" minlength="16" maxlength="16" required>
+                        <input class="form-control mb-3" type="text" th:field="*{creditCardNumber}" placeholder="1234567890987654" pattern="[0-9]{16}" title="Credit Card Number" minlength="16" maxlength="16" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-2">
                         <label>Exp. Month</label>
-                        <select class="form-control mb-3" required>
+                        <select class="form-control mb-3" th:field="*{mm}" required>
                             <option value=""></option>
                             <option value="01">01 - Jan</option>
                             <option value="02">02 - Feb</option>
@@ -85,11 +85,11 @@
                     </div>
                     <div class="col-md-2">
                         <label>Exp. Year</label>
-                        <input class="form-control mb-3" type="text" placeholder="YYYY" pattern="20[2-9]{1}[0-9]{1}" minlength="4" maxlength="4" required>
+                        <input class="form-control mb-3" type="text" th:field="*{yyyy}" placeholder="YYYY" pattern="20[2-9]{1}[0-9]{1}" minlength="4" maxlength="4" required>
                     </div>
                     <div class="col-md-2">
                         <label>CVV</label>
-                        <input class="form-control mb-3" type="text" placeholder="CVV" pattern="[0-9]{3,4}" minlength="3" maxlength="4" required>
+                        <input class="form-control mb-3" type="text" th:field="*{cvv}" placeholder="CVV" pattern="[0-9]{3,4}" minlength="3" maxlength="4" required>
                     </div>
                 </div>
             </fieldset>
@@ -98,8 +98,8 @@
                 <div class="form-row">
                     <div class="col-sm-10 mb-3">
                         <div class="form-check" th:each="category : ${categories}" >
-                            <input class="form-check-input" name="category" type="radio" th:value="${category}" th:id="${category}" required>
-                            <label class="form-check-label" th:inline="text" th:for="${category}"> [[${category}]]</label>
+                            <input class="form-check-input" type="radio" name="category" th:field="*{serviceType}" th:value="${category}" th:id="${category}" required>
+                            <label class="form-check-label" th:text="${category}"></label>
                         </div>
                     </div>
                 </div>

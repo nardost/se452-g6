@@ -30,4 +30,8 @@ class LocationService {
     List<Location> getLocationsByZipCode(int zipCode) {
         return locationRepository.findByZipCode(zipCode);
     }
+
+    void saveLocation(Location location) {
+        locationRepository.save(location);
+    }
 }

@@ -2,6 +2,7 @@ package edu.depaul.g6.ui.controller;
 
 import edu.depaul.g6.commons.IdGenerator;
 import edu.depaul.g6.facilities.domain.Location;
+import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.ui.service.FacilitiesService;
 import lombok.extern.slf4j.Slf4j;
@@ -65,20 +66,24 @@ public class FacilitiesController {
         return "subscriptions";
     }
 
+    /**
+     * This should be in AccountsController.
+     * I am only writing it because we have to make progress.
+     * Change the endpoint to /subscribe
+     */
     @GetMapping("/subscribe-fake")
     public String showSubscriptionForm(Model model) {
-        model.addAttribute("subscription", new Subscription());
+        Subscriber subscriber = new Subscriber();
         List<String> categories = new ArrayList<>();
-        facilitiesService.getAllCategories().forEach(c -> {
-            categories.add(c.getCategory());
-        });
+        facilitiesService.getAllCategories().forEach(c -> categories.add(c.getCategory()));
         model.addAttribute("categories", categories);
         model.addAttribute("states", facilitiesService.getServiceStates());
+        model.addAttribute("subscriber", subscriber);
         return "subscribe";
     }
 
     @PostMapping("/subscribe-fake")
-    public String subscribe(@Valid @ModelAttribute Subscription subscription,
+    public String subscribe(@Valid @ModelAttribute Subscriber subscriber,
                             BindingResult bindingResult) {
         /*
          * (1) Take subscription form input from user.
@@ -87,14 +92,21 @@ public class FacilitiesController {
          * (4) Confirm to user that activation is pending.
          */
         try {
-            subscription.setId(idGenerator.generateAccountNumber("email"));
-            subscription.setServiceCategory(subscription.getServiceCategory().toLowerCase());
+            facilitiesService.saveSubscriber(subscriber);
         } catch (NoSuchAlgorithmException nsae) {
-            log.error("Id generation threw a NoSuchAlgorithmException.");
+            /*
+             * Redirect to error page 5XX - Internal Server Error
+             */
+            log.error("NoSuchAlgorithmException thrown. Check the hashing algorithm.");
         }
+        log.info(subscriber.getFirstName() + " " + subscriber.getLastName());
+        log.info(subscriber.getEmail());
+        log.info(subscriber.getStreetAddress() + ", " + subscriber.getCity());
+        log.info(subscriber.getMm());
+        log.info(subscriber.getServiceType());
         /*
          * This should be the confirmation page.
          */
-        return "subscribe";
+        return "home";
     }
 }

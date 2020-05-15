@@ -1,5 +1,6 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
@@ -23,6 +24,7 @@ public class Facilities {
     private LocationService locationService;
     private ServiceCategoryService serviceCategoryService;
     private SubscriptionService subscriptionService;
+    private SubscriberService subscriberService;
 
     @Autowired
     public void setLocationService(LocationService service) {
@@ -39,10 +41,22 @@ public class Facilities {
         this.subscriptionService = service;
     }
 
-    public void activateService(String accountNumber,
-                                Location location,
-                                String category) {
-        subscriptionService.saveSubscription(accountNumber, location, category);
+    @Autowired
+    public void setSubscriberService(SubscriberService service) {
+        this.subscriberService = service;
+    }
+
+    /**
+     * (1) Checks if service is available at address
+     *     (do we have a meter installed at that address?)
+     * (2) If service is available, create a subscription object and persist it.
+     * (3) Send ACTIVATE signal to service delivery and monitoring module.
+     * (4) If no meter is installed at address:
+     *     a. Schedule an installation job
+     *     b. Notify accounts about the scheduled date
+     */
+    public void activateService(Subscriber subscriber) {
+        subscriptionService.activateService(subscriber);
     }
 
     public List<Location> getAllLocations() {
@@ -77,5 +91,12 @@ public class Facilities {
     public List<String> getStatesServed() {
         final String[] STATES_SERVED = new String[] { "IL", "IN", "WI" };
         return Stream.of(STATES_SERVED).collect(Collectors.toList());
+    }
+
+    /**
+     * This should move to accounts.
+     */
+    public void saveSubscriber(Subscriber subscriber) {
+        subscriberService.saveSubscriber(subscriber);
     }
 }
