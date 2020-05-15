@@ -8,7 +8,7 @@ import java.util.Base64;
 import java.util.Random;
 
 @Service
-public class IdGenerator {
+public class Utilities {
 
     private static final String HASHING_ALGORITHM = "MD5";
 

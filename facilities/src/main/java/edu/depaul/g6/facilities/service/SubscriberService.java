@@ -1,6 +1,6 @@
 package edu.depaul.g6.facilities.service;
 
-import edu.depaul.g6.commons.IdGenerator;
+import edu.depaul.g6.commons.Utilities;
 import edu.depaul.g6.facilities.domain.Account;
 import edu.depaul.g6.facilities.domain.Role;
 import edu.depaul.g6.facilities.domain.Subscriber;
@@ -24,7 +24,7 @@ public class SubscriberService {
 
     private final SubscriberRepository subscriberRepository;
     private AccountRepository accountRepository;
-    private IdGenerator idGenerator;
+    private Utilities utilities;
 
     @Autowired
     public SubscriberService(SubscriberRepository repository) {
@@ -37,8 +37,8 @@ public class SubscriberService {
     }
 
     @Autowired
-    public void setIdGenerator(IdGenerator generator) {
-        this.idGenerator = generator;
+    public void setUtilities(Utilities generator) {
+        this.utilities = generator;
     }
 
     /**
@@ -50,7 +50,7 @@ public class SubscriberService {
          * Generate account number, set id of the
          * subscriber, and persist the subscriber.
          */
-        final String accountNumber = idGenerator.generateAccountNumber(subscriber.getEmail());
+        final String accountNumber = utilities.generateAccountNumber(subscriber.getEmail());
         subscriber.setId(accountNumber);
         subscriberRepository.save(subscriber);
         log.info("Subscriber " + subscriber.getId() + " saved to database.");
