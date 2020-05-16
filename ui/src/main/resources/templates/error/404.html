@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head-tag"></head>
-<body>
-<div th:replace="fragments :: banner-and-navbar" />
-<div class="container">
-    <h1 class="display-1 text-danger" th:inline="text">Error</h1>
-</div>
-<div th:replace="fragments :: footer" />
-</body>
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+    <div th:replace="fragments :: banner-and-navbar"></div>
+    <div class="container">
+        <h1 class="display-1 text-danger" th:inline="text">Error</h1>
+    </div>
+    <div th:replace="fragments :: footer"></div>
+    </body>
 </html>

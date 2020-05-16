@@ -7,9 +7,9 @@
     <h1 class="display-1" th:inline="text">[[${#lists.size(categories)}]] categories found.</h1>
     <table class="table table-striped">
         <tr><th>CATEGORY</th><th>TARIFF</th></tr>
-        <tr th:each="category : ${categories}">
-            <td th:text="${category.category}" />
-            <td th:inline="text">[[${category.tariff}]] USD/kWh</td>
+        <tr th:each="a_category : ${categories}">
+            <td th:text="${a_category.category}"></td>
+            <td th:inline="text">[[${a_category.tariff}]] USD/kWh</td>
         </tr>
     </table>
 </div>
