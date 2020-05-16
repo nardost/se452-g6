@@ -1,14 +1,11 @@
 package edu.depaul.g6.facilities.service;
 
-import edu.depaul.g6.facilities.domain.Account;
-import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.domain.ServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,8 +48,8 @@ public class Facilities {
      *     a. Schedule an installation job
      *     b. Notify accounts about the scheduled date
      */
-    public void activateService(Subscriber subscriber) {
-        subscriptionService.activateService(subscriber);
+    public void activateService(String accountNumber, Location location, String serviceType) {
+        subscriptionService.activateService(accountNumber, location, serviceType);
     }
 
     public List<Location> getAllLocations() {
@@ -92,28 +89,4 @@ public class Facilities {
         final String[] STATES_SERVED = new String[] { "IL", "IN", "WI" };
         return Stream.of(STATES_SERVED).collect(Collectors.toList());
     }
-
-    //TODO This will move out into accounts
-    private SubscriberService subscriberService;
-    private AccountService accountService;
-
-    //TODO This will move out into accounts
-    @Autowired
-    public void setSubscriberService(SubscriberService service) {
-        this.subscriberService = service;
-    }
-    @Autowired void setAccountService(AccountService service) {
-        this.accountService = service;
-    }
-
-    //TODO This will move out into accounts
-    public String saveSubscriber(Subscriber s) throws NoSuchAlgorithmException {
-        return subscriberService.saveSubscriber(s);
-    }
-
-    //TODO This will move out into accounts
-    public Account getAccount(String accountNumber) {
-        return accountService.getAccount(accountNumber);
-    }
-
 }

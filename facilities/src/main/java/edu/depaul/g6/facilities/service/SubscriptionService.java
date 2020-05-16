@@ -1,7 +1,6 @@
 package edu.depaul.g6.facilities.service;
 
 import edu.depaul.g6.facilities.ServiceStatus;
-import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
 import edu.depaul.g6.facilities.repository.SubscriptionRepository;
@@ -47,33 +46,27 @@ public class SubscriptionService {
     /**
      *
      */
-    void activateService(Subscriber subscriber) {
+    void activateService(String accountNumber, Location location, String serviceType) {
         /*
          * Create a Location object and set its fields.
          */
-        final String streetAddress = subscriber.getStreetAddress();
-        final String unit = subscriber.getUnit();
-        final String city = subscriber.getCity();
-        final String state = subscriber.getState();
-        final int zipCode = subscriber.getZipCode();
+        final String streetAddress = location.getStreetAddress();
+        final String unit = location.getUnit();
+        final String city = location.getCity();
+        final String state = location.getState();
+        final int zipCode = location.getZipCode();
         final String locationString = streetAddress + unit + city + state + zipCode;
         /*
          * hashCode is supposed to be unique.
          */
         final int id = locationString.hashCode();
+        location.setId(id);
         /*
          * What is the MAC address of the smart meter
          * installed at the location? Get is from the
          * MeterService.
          */
         final String MAC_ADDRESS = "xxxxyyyyzzzzaaaabbbb";
-        Location location = new Location();
-        location.setId(id);
-        location.setStreetAddress(streetAddress);
-        location.setUnit(unit);
-        location.setCity(city);
-        location.setState(state);
-        location.setZipCode(zipCode);
         location.setMeterMacAddress(MAC_ADDRESS);
 
         /*
@@ -102,9 +95,9 @@ public class SubscriptionService {
          * and hand it over to SubscriptionService.
          */
         Subscription subscription = new Subscription();
-        subscription.setId(subscriber.getId());
+        subscription.setId(accountNumber);
         subscription.setLocation(location);
-        subscription.setServiceCategory(subscriber.getServiceType());
+        subscription.setServiceCategory(serviceType);
         subscription.setActivationTimeStamp(Timestamp.from(Instant.now()));
         subscription.setServiceStatus(status);
 

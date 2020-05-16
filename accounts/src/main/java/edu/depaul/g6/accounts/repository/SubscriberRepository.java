@@ -1,6 +1,6 @@
-package edu.depaul.g6.facilities.repository;
+package edu.depaul.g6.accounts.repository;
 
-import edu.depaul.g6.facilities.domain.Subscriber;
+import edu.depaul.g6.accounts.domain.Subscriber;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

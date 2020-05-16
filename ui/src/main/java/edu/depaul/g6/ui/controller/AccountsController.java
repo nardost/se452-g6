@@ -1,8 +1,8 @@
 package edu.depaul.g6.ui.controller;
 
 import edu.depaul.g6.accounts.service.Accounts;
-import edu.depaul.g6.facilities.domain.Account;
-import edu.depaul.g6.facilities.domain.Subscriber;
+import edu.depaul.g6.accounts.domain.Account;
+import edu.depaul.g6.accounts.domain.Subscriber;
 import edu.depaul.g6.facilities.service.Facilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,15 +67,14 @@ public class AccountsController {
          */
         try {
             final String accountNumber;
-            accountNumber = facilities.saveSubscriber(subscriber);
+            accountNumber = accounts.saveSubscriber(subscriber);
             log.info("The new account number is " + accountNumber);
             log.info(subscriber.getFirstName() + " " + subscriber.getLastName());
             log.info(subscriber.getEmail());
             log.info(subscriber.getStreetAddress() + ", " + subscriber.getCity());
             log.info(subscriber.getMm());
             log.info(subscriber.getServiceType());
-
-            Account account = facilities.getAccount(accountNumber);
+            Account account = accounts.getAccount(accountNumber);
             model.addAttribute("account", account);
             return "password-reset";
         } catch (NoSuchAlgorithmException nsae) {

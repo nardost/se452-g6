@@ -1,7 +1,7 @@
-package edu.depaul.g6.facilities.service;
+package edu.depaul.g6.accounts.service;
 
-import edu.depaul.g6.facilities.domain.Account;
-import edu.depaul.g6.facilities.repository.AccountRepository;
+import edu.depaul.g6.accounts.domain.Account;
+import edu.depaul.g6.accounts.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,13 @@
-package edu.depaul.g6.facilities.service;
+package edu.depaul.g6.accounts.service;
 
+import edu.depaul.g6.accounts.domain.Account;
+import edu.depaul.g6.accounts.domain.Role;
+import edu.depaul.g6.accounts.domain.Subscriber;
+import edu.depaul.g6.accounts.repository.AccountRepository;
+import edu.depaul.g6.accounts.repository.SubscriberRepository;
 import edu.depaul.g6.commons.Utilities;
-import edu.depaul.g6.facilities.domain.Account;
-import edu.depaul.g6.facilities.domain.Role;
-import edu.depaul.g6.facilities.domain.Subscriber;
-import edu.depaul.g6.facilities.repository.AccountRepository;
-import edu.depaul.g6.facilities.repository.SubscriberRepository;
+import edu.depaul.g6.facilities.domain.Location;
+import edu.depaul.g6.facilities.service.Facilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
 public class SubscriberService {
 
     private Facilities facilities;
+
     @Autowired
     public void setFacilities(Facilities f) {
         this.facilities = f;
@@ -68,7 +71,13 @@ public class SubscriberService {
         /*
          * Send subscription to facilities for activation.
          */
-        facilities.activateService(subscriber);
+        Location location = new Location();
+        location.setStreetAddress(subscriber.getStreetAddress());
+        location.setUnit(subscriber.getUnit());
+        location.setCity(subscriber.getCity());
+        location.setState(subscriber.getState());
+        location.setZipCode(subscriber.getZipCode());
+        facilities.activateService(accountNumber, location, subscriber.getServiceType());
         log.info("Activation request for " + subscriber.getId() + " sent to facilities.");
         return accountNumber;
     }
