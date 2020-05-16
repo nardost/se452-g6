@@ -19,4 +19,8 @@ public class AccountService {
         accountRepository.save(a);
     }
 
+    public Account getAccount(String accountNumber) {
+        return accountRepository.findById(accountNumber).get();
+    }
+
 }

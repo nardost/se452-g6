@@ -1,6 +1,7 @@
 package edu.depaul.g6.ui.controller;
 
 import edu.depaul.g6.accounts.service.Accounts;
+import edu.depaul.g6.facilities.domain.Account;
 import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.service.Facilities;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,7 @@ public class AccountsController {
 
     @PostMapping("/subscribe")
     public String subscribe(@Valid @ModelAttribute Subscriber subscriber,
-                            BindingResult bindingResult) {
+                            BindingResult bindingResult, Model model) {
         /*
          * (1) Take subscription form input from user.
          * (2) Generate account id.
@@ -73,11 +74,10 @@ public class AccountsController {
             log.info(subscriber.getStreetAddress() + ", " + subscriber.getCity());
             log.info(subscriber.getMm());
             log.info(subscriber.getServiceType());
-            /*
-             * This should be the confirmation page.
-             */
 
-            return "home";
+            Account account = facilities.getAccount(accountNumber);
+            model.addAttribute("account", account);
+            return "password-reset";
         } catch (NoSuchAlgorithmException nsae) {
             /*
              * Redirect to error page 5XX - Internal Server Error

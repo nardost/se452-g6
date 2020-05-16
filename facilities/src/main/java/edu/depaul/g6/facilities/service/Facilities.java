@@ -1,5 +1,6 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.facilities.domain.Account;
 import edu.depaul.g6.facilities.domain.Subscriber;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
@@ -94,16 +95,25 @@ public class Facilities {
 
     //TODO This will move out into accounts
     private SubscriberService subscriberService;
+    private AccountService accountService;
 
     //TODO This will move out into accounts
     @Autowired
     public void setSubscriberService(SubscriberService service) {
         this.subscriberService = service;
     }
+    @Autowired void setAccountService(AccountService service) {
+        this.accountService = service;
+    }
 
     //TODO This will move out into accounts
     public String saveSubscriber(Subscriber s) throws NoSuchAlgorithmException {
         return subscriberService.saveSubscriber(s);
+    }
+
+    //TODO This will move out into accounts
+    public Account getAccount(String accountNumber) {
+        return accountService.getAccount(accountNumber);
     }
 
 }
