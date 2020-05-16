@@ -8,7 +8,7 @@
     <table class="table table-striped">
         <tr><th>CATEGORY</th><th>TARIFF</th></tr>
         <tr th:each="category : ${categories}">
-            <td th:text="${category.id}" />
+            <td th:text="${category.category}" />
             <td th:inline="text">[[${category.tariff}]] USD/kWh</td>
         </tr>
     </table>

@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ServiceCategoryService {
 
-    private ServiceCategoryRepository serviceCategoryRepository;
+    private final ServiceCategoryRepository serviceCategoryRepository;
 
     @Autowired
     ServiceCategoryService(ServiceCategoryRepository repository) {

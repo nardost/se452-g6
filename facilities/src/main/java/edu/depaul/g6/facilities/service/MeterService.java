@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MeterService {
 
-    private MeterRepository meterRepository;
+    private final MeterRepository meterRepository;
 
     @Autowired
     MeterService(MeterRepository repository) {

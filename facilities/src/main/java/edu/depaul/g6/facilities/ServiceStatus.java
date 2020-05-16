@@ -4,5 +4,6 @@ public enum ServiceStatus {
     SCHEDULED,
     ACTIVATED,
     SUSPENDED,
-    TERMINATED
+    TERMINATED,
+    INVALID
 }
