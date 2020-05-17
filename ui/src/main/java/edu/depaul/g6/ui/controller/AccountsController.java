@@ -1,12 +1,18 @@
 package edu.depaul.g6.ui.controller;
 
+import edu.depaul.g6.accounts.repository.AccountRepository;
 import edu.depaul.g6.accounts.service.Accounts;
 import edu.depaul.g6.accounts.domain.Account;
 import edu.depaul.g6.accounts.domain.Subscriber;
+import edu.depaul.g6.commons.Utilities;
 import edu.depaul.g6.facilities.service.Facilities;
+import edu.depaul.g6.ui.config.G6UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +36,9 @@ public class AccountsController {
     private Facilities facilities;
 
     @Autowired
+    private Utilities utilities;
+
+    @Autowired
     public AccountsController(Accounts accounts){
         this.accounts = accounts;
     }
@@ -39,11 +48,19 @@ public class AccountsController {
         this.facilities = f;
     }
 
+
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("applicationName", applicationName);
-        return "home";
+        return "index";
     }
+
+
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        return "logout";
+    }
+
 
     @GetMapping("/subscribe")
     public String showSubscriptionForm(Model model) {
@@ -55,6 +72,7 @@ public class AccountsController {
         model.addAttribute("subscriber", subscriber);
         return "subscribe";
     }
+
 
     @PostMapping("/subscribe")
     public String subscribe(@Valid @ModelAttribute Subscriber subscriber,
@@ -76,13 +94,39 @@ public class AccountsController {
             log.info(subscriber.getServiceType());
             Account account = accounts.getAccount(accountNumber);
             model.addAttribute("account", account);
+
+            // EXPERIMENTING - CHRISTIAN
+            // logs in the user programmatically after registration
+            G6UserPrincipal user = new G6UserPrincipal(account, subscriber);
+            Authentication auth =
+                    new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            // EXPERIMENTING
+
             return "password-reset";
         } catch (NoSuchAlgorithmException nsae) {
             /*
              * Redirect to error page 5XX - Internal Server Error
              */
             log.error("NoSuchAlgorithmException thrown. Check the hashing algorithm.");
-            return "home";
+            return "index";
         }
+    }
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @PostMapping("/password-reset")
+    public String subscribe(@Valid @ModelAttribute Account account,
+                            BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            log.info("There was an error binding.");
+            return "password-reset";
+        }
+
+        Account inRepo = accountRepository.findByEmail(account.getEmail());
+        inRepo.setPassword(utilities.encodePassword(account.getPassword()));
+        accountRepository.save(inRepo);
+        return "redirect:/";
     }
 }

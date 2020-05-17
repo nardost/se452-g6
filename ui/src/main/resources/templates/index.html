@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <!-- a way to include the head fragment without overriding this head... a bit hacky -->
+        <head th:include="fragments :: head-tag"></head>
+        <link href="styles/index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+
+        <main class="container">
+            <!-- NOT LOGGED IN -->
+            <div sec:authorize="isAnonymous()" style="width: 240px;">
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    Invalid credentials.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                    You have been logged out.
+                </div>
+                <form th:action="@{/}" method="post">
+                    <label>
+                        Email:<br><input type="text" name="username" style="width: 235px;"/>
+                    </label>
+                    <br>
+                    <label>
+                        Password:<br><input type="password" name="password" style="width: 235px;"/>
+                    </label>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Sign In" />
+                </form>
+                <a href="subscribe"><button type="button" class="btn btn-secondary">Not Yet Subscribed?</button></a>
+            </div>
+
+            <!-- AUTHENTICATED -->
+            <div sec:authorize="isAuthenticated()" class="text-center">
+                <h1>Welcome <span sec:authentication="principal.firstName"></span>.</h1>
+            </div>
+        </main>
+
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
+</html>

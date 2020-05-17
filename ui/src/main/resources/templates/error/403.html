@@ -8,7 +8,10 @@
     <body>
         <header th:replace="fragments :: banner-and-navbar"></header>
         <main class="container" style="text-align: center;">
-            <h1 class="text-danger" th:inline="text">[[${status}]] [[${error}]].</h1>
+            <div>
+                <h1 class="text-danger">403 Forbidden.</h1>
+                <h3>You do not have access to this content.</h3>
+            </div>
         </main>
         <footer th:replace="fragments :: footer"></footer>
     </body>

@@ -5,8 +5,8 @@
 <div th:replace="fragments :: banner-and-navbar" />
 <div class="container">
     <div class="col-lg-9">
-        <h1 class="display-4">New Customer Subscription Form</h1>
-        <form class="" method="post" th:action="@{/subscribe}" th:object="${subscriber}">
+        <h1 class="h2 mb-4">We're happy to help.</h1>
+        <form method="post" th:action="@{/subscribe}" th:object="${subscriber}" style="width: 650px;">
             <fieldset class="form-group">
                 <legend>Subscriber Information</legend>
                 <div class="form-row">
@@ -55,12 +55,12 @@
             </fieldset>
             <fieldset class="form-group">
                 <legend>Payment Information</legend>
-                <blockquote class="blockquote">
-                    <smal class="text-info">Name on card & billing address must match details provided above.</smal>
-                </blockquote>
+                <p class="alert alert-info" role="alert" style="display: inline-block;">
+                    Your card information must coincide with the details provided above.
+                </p>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <label> Credit Card Number</label>
+                        <label> Credit Card #</label>
                         <input class="form-control mb-3" type="text" th:field="*{creditCardNumber}" placeholder="1234567890987654" pattern="[0-9]{16}" title="Credit Card Number" minlength="16" maxlength="16" required>
                     </div>
                 </div>

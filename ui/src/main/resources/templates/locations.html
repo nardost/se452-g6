@@ -4,7 +4,7 @@
 <body>
 <div th:replace="fragments :: banner-and-navbar" />
 <div class="container">
-    <h1 class="display-1" th:inline="text">[[${#lists.size(locations)}]] locations found.</h1>
+    <h1 class="h1" th:inline="text">[[${#lists.size(locations)}]] locations found.</h1>
     <table class="table table-striped">
         <tr>
             <th>Street Address</th>
