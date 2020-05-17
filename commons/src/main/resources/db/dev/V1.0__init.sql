@@ -13,7 +13,7 @@ create table service_locations (
 create table subscriptions (
     id varchar(10) primary key,
     location_id integer references service_locations,
-    service_category varchar(20),
+    service_category varchar(64),
     activation_timestamp timestamp,
     service_status varchar(10)
 );

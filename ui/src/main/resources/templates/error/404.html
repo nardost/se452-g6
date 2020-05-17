@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments :: head-tag"></head>
+    <head>
+        <!-- a way to include the head fragment without overriding this head... a bit hacky -->
+        <head th:include="fragments :: head-tag"></head>
+        <link href="styles/index.css" rel="stylesheet" />
+    </head>
     <body>
-    <div th:replace="fragments :: banner-and-navbar"></div>
-    <div class="container">
-        <h1 class="display-1 text-danger" th:inline="text">Error</h1>
-    </div>
-    <div th:replace="fragments :: footer"></div>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container" style="text-align: center;">
+            <div>
+                <h1 class="text-danger">404 Not Found.</h1>
+                <h3>Uh oh. The content you requested does not exist.</h3>
+            </div>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
     </body>
 </html>

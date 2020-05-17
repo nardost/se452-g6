@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- fragment -->
 <head th:fragment="head-tag">
@@ -13,38 +15,38 @@
 
     <script>
         window.onload = () => {
-            let boltUnfilled = document.getElementById('boltUnfilled');
-            let boltFilled   = document.getElementById('boltFilled');
-            let filledDisplayed = false;
+            let boltUnhovered = document.getElementById('boltUnhovered');
+            let boltHovered   = document.getElementById('boltHovered');
+            let hoveredDisplayed = false;
 
-            function toggleBoltFill() {
-                if (!filledDisplayed) {
-                    boltUnfilled.style.display = 'none';
-                    boltFilled.style.display   = 'inline-block';
-                    filledDisplayed = true;
+            function toggleBolt() {
+                if (!hoveredDisplayed) {
+                    boltUnhovered.style.display = 'none';
+                    boltHovered.style.display   = 'inline-block';
+                    hoveredDisplayed = true;
                 }
                 else {
-                    boltUnfilled.style.display = 'inline-block';
-                    boltFilled.style.display   = 'none';
-                    filledDisplayed = false;
+                    boltUnhovered.style.display = 'inline-block';
+                    boltHovered.style.display   = 'none';
+                    hoveredDisplayed = false;
                 }
             }
 
             let home = document.getElementById('home');
-            home.onmouseenter = toggleBoltFill; home.onmouseleave = toggleBoltFill;
+            home.onmouseenter = toggleBolt; home.onmouseleave = toggleBolt;
         }
     </script>
 </head>
 
 <!-- fragment -->
-<div class="container" th:fragment="banner-and-navbar">
-    <header class="bg-white">
+<header class="container" th:fragment="banner-and-navbar">
+    <div class="bg-white">
         <h1 id="home" class="display-4 p-3" th:inline="text">
             <a href="/">
-                <svg id="boltUnfilled" class="bi bi-lightning" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M11.251.068a.5.5 0 01.227.58L9.677 6.5H13a.5.5 0 01.364.843l-8 8.5a.5.5 0 01-.842-.49L6.323 9.5H3a.5.5 0 01-.364-.843l8-8.5a.5.5 0 01.615-.09zM4.157 8.5H7a.5.5 0 01.478.647L6.11 13.59l5.732-6.09H9a.5.5 0 01-.478-.647L9.89 2.41 4.157 8.5z" clip-rule="evenodd"/>
+                <svg id="boltUnhovered" class="bi bi-lightning-fill" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="lightgrey" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M11.251.068a.5.5 0 01.227.58L9.677 6.5H13a.5.5 0 01.364.843l-8 8.5a.5.5 0 01-.842-.49L6.323 9.5H3a.5.5 0 01-.364-.843l8-8.5a.5.5 0 01.615-.09z" clip-rule="evenodd"/>
                 </svg>
-                <svg id="boltFilled" class="bi bi-lightning-fill" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg id="boltHovered" class="bi bi-lightning-fill" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="lightblue" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M11.251.068a.5.5 0 01.227.58L9.677 6.5H13a.5.5 0 01.364.843l-8 8.5a.5.5 0 01-.842-.49L6.323 9.5H3a.5.5 0 01-.364-.843l8-8.5a.5.5 0 01.615-.09z" clip-rule="evenodd"/>
                 </svg>
                 <span th:inline="text">[[${@environment.getProperty('spring.application.name')}]]</span>
@@ -124,101 +126,60 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item pr-3">
-                        <a class="nav-link" href="/subscribe">
+                    <li sec:authorize="isAuthenticated()" class="nav-item" style="position: absolute; right: 10px;">
+                        <a href="/logout">
+                            <button class="btn btn-outline-secondary" type="button">
                                 <span style="font-size: 1.3em">
-                                    <i class="fas fa-laugh-beam"></i> Subscribe
+                                    <i class="fas fa-sign-out-alt"></i> Sign Out
                                 </span>
+                            </button>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-secondary" type="button">
-                                <span style="font-size: 1.3em">
-                                    <i class="fas fa-sign-in-alt"></i> Sign In
-                                </span>
-                        </button>
                     </li>
                 </ul>
             </div>
         </nav>
         <hr>
-    </header>
-</div>
+    </div>
+</header>
 
 <!-- body of page goes here -->
 
 <!-- fragment -->
 
-<div class="container" th:fragment="footer">
+<footer class="container" th:fragment="footer">
     <hr>
-    <footer class="page-footer font-small special-color-dark pt-4">
+    <div class="page-footer font-small special-color-dark pt-4">
         <div class="text-center bg-light">
             <div class="d-flex justify-content-center flex-row g6-gray-1">
-                <div class="p-5">
-                    <svg class="bi bi-person-bounding-box mb-2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                    </svg>
+                <div class="p-4">
                     <h4>Matthew James</h4>
                 </div>
-                <div class="p-5">
-                    <svg class="bi bi-person-bounding-box mb-2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                    </svg>
+                <div class="p-4">
                     <h4>Christian Kleinvehn</h4>
                 </div>
-                <div class="p-5">
-                    <svg class="bi bi-person-bounding-box mb-2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                    </svg>
+                <div class="p-4">
                     <h4>Pedro Rebollar</h4>
                 </div>
-                <div class="p-5">
-                    <svg class="bi bi-person-bounding-box mb-2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                    </svg>
+                <div class="p-4">
                     <h4>Nardos Tessema</h4>
                 </div>
             </div>
         </div>
         <div class="footer-copyright text-center bg-light mb-2">
-                <span>
-                    <ul class="list-unstyled list-inline text-center">
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-fb mx-1 g6-gray-2" href="https://github.com/nardost/se452-g6" target="_blank">
-                                <span style="font-size: 2em">
-                                    <i class="fab fa-github"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-tw mx-1 g6-gray-2" href="https://trello.com/b/CTdlbXdV/utility-service-management" target="_blank">
-                                <span style="font-size: 2em">
-                                    <i class="fab fa-trello"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-gplus mx-1 g6-gray-2" href="https://se452-g6.slack.com/" target="_blank">
-                                <span style="font-size: 2em">
-                                    <i class="fab fa-slack"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
+            <a class="btn-floating btn-fb mx-1 g6-gray-2" href="https://github.com/nardost/se452-g6" target="_blank">
+                <span style="font-size: 3em">
+                    <i class="fab fa-github"></i>
                 </span>
+            </a>
+            <p class="pb-3">
+                <small>
+                    DePaul University <i class="fas fa-angle-double-right"></i>
+                    CDM <i class="fas fa-angle-double-right"></i>
+                    SE352/452 - Object-Oriented Enterprise Application Development <i class="fas fa-angle-double-right"></i>
+                    Spring 2020 <i class="fas fa-angle-double-right"></i>
+                    Group 6
+                </small>
+            </p>
         </div>
-        <div class="text-secondary text-center">
-            <small>
-                DePaul University <i class="fas fa-angle-double-right"></i>
-                CDM <i class="fas fa-angle-double-right"></i>
-                SE352/452 - Object-Oriented Enterprise Application Development <i class="fas fa-angle-double-right"></i>
-                Spring 2020 <i class="fas fa-angle-double-right"></i>
-                Group 6
-            </small>
-        </div>
-    </footer>
-</div>
+    </div>
+</footer>

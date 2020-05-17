@@ -1,9 +1,16 @@
-.g6-dark-gray {
-    color:#566573;
+* {
+    --header-height: 260px;
+    --footer-height: 260px;
 }
+
+.g6-dark-gray {
+    color: #566573;
+}
+
 .g6-gray-1 {
     color: lightslategray;
 }
+
 .g6-gray-2,
 a.g6-gray-2:active,
 a.g6-gray-2:visited {
@@ -16,9 +23,6 @@ a.g6-gray-2:hover {
 
 #home {
     box-sizing: border-box;
-    border-left: 0px solid white;
-    border-left: 0px solid lightblue;
-    border-bottom: 0px solid black;
     font-variant: small-caps;
 }
 
@@ -40,7 +44,28 @@ a.g6-gray-2:hover {
     padding-right: 10px;
 }
 
+#boltUnhovered {
+    filter: drop-shadow(3px 3px 2px #000);
+}
 
-#boltFilled {
+#boltHovered {
     display: none;
+    filter: drop-shadow(2px 2px 2px #000);
+}
+
+header {
+    height: var(--header-height);
+}
+
+main {
+    min-height: calc(97vh - var(--footer-height) - var(--header-height));
+}
+
+footer {
+    height: var(--footer-height);
+}
+
+
+legend {
+    margin-bottom: 20px;
 }

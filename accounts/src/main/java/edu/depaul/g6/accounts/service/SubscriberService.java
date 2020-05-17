@@ -63,7 +63,7 @@ public class SubscriberService {
         Account account = new Account();
         account.setId(subscriber.getId());
         account.setEmail(subscriber.getEmail());
-        final String encodedPassword =  utilities.encodePassword(subscriber.getId());
+        final String encodedPassword = utilities.encodePassword(subscriber.getId());
         account.setPassword(encodedPassword);
         account.setRole(Role.ROLE_USER);
         accountRepository.save(account);
