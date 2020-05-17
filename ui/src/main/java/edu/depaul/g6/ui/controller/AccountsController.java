@@ -129,4 +129,10 @@ public class AccountsController {
         accountRepository.save(inRepo);
         return "redirect:/";
     }
+
+
+    @GetMapping("/account-details")
+    public String accountDetails() {
+        return "account-details"; // can probably just do everything from Thymeleaf as it can access the principal
+    }
 }

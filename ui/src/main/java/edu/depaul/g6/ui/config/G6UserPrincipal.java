@@ -13,25 +13,27 @@ import edu.depaul.g6.accounts.domain.Account;
 @Getter
 @Setter
 public class G6UserPrincipal extends User {
-    private String firstName;
-    private String lastName;
-    private String lastFourCcDigits;
-    private String streetAddress;
-    private String unit;
-    private String city;
-    private String state;
-    private Integer zipCode;
-    private String serviceType;
+    private final String  accountId;
+    private final String  firstName;
+    private final String  lastName;
+    private final String  lastFourCcDigits;
+    private final String  streetAddress;
+    private final String  unit;
+    private final String  city;
+    private final String  state;
+    private final Integer zipCode;
+    private final String  serviceType;
 
 
     public G6UserPrincipal(Account account, Subscriber subscriber) {
-        super(account.getEmail(),
-              account.getPassword(),
-              Collections.singleton(new SimpleGrantedAuthority(account.getRole().toString())));
+        super(account.getEmail(),    // username
+              account.getPassword(), // password
+              Collections.singleton(new SimpleGrantedAuthority(account.getRole().toString()))); // roles (authorities)
 
+        this.accountId        = account.getId();
         this.firstName        = subscriber.getFirstName();
         this.lastName         = subscriber.getLastName(); final String cc = subscriber.getCreditCardNumber();
-        this.lastFourCcDigits = cc.substring(cc.length() - 5);
+        this.lastFourCcDigits = cc.substring(cc.length() - 4);
         this.streetAddress    = subscriber.getStreetAddress();
         this.unit             = subscriber.getUnit();
         this.city             = subscriber.getCity();
