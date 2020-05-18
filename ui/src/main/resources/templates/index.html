@@ -12,25 +12,34 @@
 
         <main class="container">
             <!-- NOT LOGGED IN -->
-            <div sec:authorize="isAnonymous()" style="width: 240px;">
+            <div sec:authorize="isAnonymous()" style="text-align: center;">
                 <div th:if="${param.error}" class="alert alert-danger" role="alert">
                     Invalid credentials.
                 </div>
                 <div th:if="${param.logout}" class="alert alert-info" role="alert">
                     You have been logged out.
                 </div>
-                <form th:action="@{/}" method="post">
-                    <label>
+                <!--
+                THE ALERT BELOW IS NOT CURRENTLY USED.
+                IF ANYBODY CAN FIGURE OUT HOW TO MAKE THE LOGIN REDIRECT ACCEPT A QUERY PARAMETER THAT'D BE GREAT.
+                -->
+                <div th:if="${param.unauthenticated}" class="alert alert-warning" role="alert">
+                    You need to login in order to view this content.
+                </div>
+
+                <form th:action="@{/}" method="post" style="width: 235px;">
+                    <label style="text-align: left;">
                         Email:<br><input type="text" name="username" style="width: 235px;"/>
                     </label>
                     <br>
-                    <label>
+                    <label style="text-align: left;">
                         Password:<br><input type="password" name="password" style="width: 235px;"/>
                     </label>
                     <br>
                     <input class="btn btn-primary" type="submit" value="Sign In" />
+                    <br>
+                    <a href="subscribe"><button type="button" class="btn btn-secondary">Not Yet Subscribed?</button></a>
                 </form>
-                <a href="subscribe"><button type="button" class="btn btn-secondary">Not Yet Subscribed?</button></a>
             </div>
 
             <!-- AUTHENTICATED -->

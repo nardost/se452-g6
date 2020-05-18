@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <!-- a way to include the head fragment without overriding this head... a bit hacky -->
+        <head th:include="fragments :: head-tag"></head>
+        <link href="styles/index.css" rel="stylesheet" />
+        <style>
+            tr:nth-of-type(even) td:nth-of-type(2) {
+                opacity: .9;
+            }
+
+            td:nth-of-type(2) {
+                background-color: white;
+                color: black;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+
+        <main class="container">
+            <div>
+                <h1 class="mb-4">Hi <span sec:authentication="principal.firstName"></span> <span sec:authentication="principal.lastName"></span>.</h1>
+                <table class="table table-striped table-dark">
+                    <tr>
+                        <td>Account ID</td>
+                        <td sec:authentication="principal.accountId"></td>
+                    </tr>
+                    <tr>
+                        <td>Credit Card</td>
+                        <td>&#9679;&#9679;&#9679;&#9679; &#9679;&#9679;&#9679;&#9679; &#9679;&#9679;&#9679;&#9679; <span sec:authentication="principal.lastFourCcDigits"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>
+                            <span sec:authentication="principal.streetAddress"></span><span th:if="${#authentication.principal.unit != null and !#strings.isEmpty(#authentication.principal.unit)}">, Unit <span sec:authentication="principal.unit"></span></span><br>
+                            <span sec:authentication="principal.city"></span>, <span sec:authentication="principal.state"></span> <span sec:authentication="principal.zipCode"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Service Type</td>
+                        <td sec:authentication="principal.serviceType"></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
+</html>
