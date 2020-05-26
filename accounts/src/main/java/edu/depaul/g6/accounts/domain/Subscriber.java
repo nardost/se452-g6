@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name = "subscriber")
+@Table(name = "subscribers")
 public class Subscriber implements Serializable {
 
     @Id

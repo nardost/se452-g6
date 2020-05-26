@@ -1,4 +1,6 @@
--- subscriber information accepted from subscription form
+-- subscribers
+-- exists in accounts module
+-- information accepted from subscription form
 create table subscribers (
     id varchar(10) primary key,
     first_name varchar(20) not null,
@@ -16,7 +18,9 @@ create table subscribers (
     service_type varchar(50) not null
 );
 
--- account information used for authentication
+-- accounts
+-- exists in accounts module
+-- information used for authentication
 create table accounts (
     id varchar(10) primary key,
     email varchar(64) unique not null,
@@ -25,6 +29,8 @@ create table accounts (
 );
 
 -- service locations
+-- exists in facilities module
+-- locations where service is installed
 create table service_locations (
     id integer primary key,
     street_address varchar(255),
@@ -36,6 +42,8 @@ create table service_locations (
 );
 
 -- subscriptions
+-- exists in facilities module
+-- customer subscription information
 create table subscriptions (
     id varchar(10) primary key,
     location integer references service_locations,
@@ -43,10 +51,13 @@ create table subscriptions (
     activation_timestamp timestamp,
     service_status varchar(10)
 );
+
 -- bills
+-- exists in billing module
+-- billing information
 create table bills (
     id serial primary key,
-    account_number varchar(10) references accounts,
+    account_number varchar(10) not null,
     amount integer not null,
     billing_date date default current_date,
     due_date date not null,
@@ -54,9 +65,11 @@ create table bills (
 );
 
 -- payments
+-- exists in payment module
+-- payment information
 create table payments (
     id serial primary key,
-    bill_id integer references bills,
+    bill_id integer not null,
     amount integer not null,
     credit_card_number varchar(16) not null,
     cvv integer not null,
