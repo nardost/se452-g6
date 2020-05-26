@@ -7,7 +7,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 @Configuration
-public class RedisBean {
+public class RedisConnectionFactoryBean {
 
     @Value("${spring.redis.host}")
     private String redisHost;

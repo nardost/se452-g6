@@ -24,15 +24,6 @@ create table accounts (
     role varchar(16) not null
 );
 
--- subscriptions
-create table subscriptions (
-    id varchar(10) primary key,
-    location integer references service_locations,
-    service_category varchar(64),
-    activation_timestamp timestamp,
-    service_status varchar(10)
-);
-
 -- service locations
 create table service_locations (
     id integer primary key,
@@ -44,11 +35,19 @@ create table service_locations (
     meter_mac_address varchar(20)
 );
 
+-- subscriptions
+create table subscriptions (
+    id varchar(10) primary key,
+    location integer references service_locations,
+    service_category varchar(64),
+    activation_timestamp timestamp,
+    service_status varchar(10)
+);
 -- bills
 create table bills (
     id serial primary key,
     account_number varchar(10) references accounts,
-    amount integer(20) not null,
+    amount integer not null,
     billing_date date default current_date,
     due_date date not null,
     paid boolean default false
@@ -60,12 +59,12 @@ create table payments (
     bill_id integer references bills,
     amount integer not null,
     credit_card_number varchar(16) not null,
-    cvv integer(4) not null,
+    cvv integer not null,
     name_on_card varchar(255) not null,
     street_address varchar(255) not null,
     city varchar(50) not null,
     state varchar(2) not null,
-    zip_code integer(5) not null,
+    zip_code integer not null,
     unit varchar(16),
     transaction_time timestamp not null,
     approved boolean default false
