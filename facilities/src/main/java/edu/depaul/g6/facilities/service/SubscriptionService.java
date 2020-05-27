@@ -20,6 +20,7 @@ public class SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
     private LocationService locationService;
+    private MeterService meterService;
 
     @Autowired
     SubscriptionService(SubscriptionRepository repository) {
@@ -29,6 +30,11 @@ public class SubscriptionService {
     @Autowired
     void setLocationService(LocationService service) {
         this.locationService = service;
+    }
+
+    @Autowired
+    void setMeterService(MeterService service) {
+        this.meterService = service;
     }
 
     Subscription getSubscription(String accountNumber) {
@@ -66,7 +72,7 @@ public class SubscriptionService {
          * installed at the location? Get is from the
          * MeterService.
          */
-        final String MAC_ADDRESS = "xxxxyyyyzzzzaaaabbbb";
+        final String MAC_ADDRESS = meterService.getMeter().getMac();
         location.setMeterMacAddress(MAC_ADDRESS);
 
         /*

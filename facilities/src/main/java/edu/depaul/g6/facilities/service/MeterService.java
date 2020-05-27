@@ -17,7 +17,10 @@ public class MeterService {
         this.meterRepository = repository;
     }
 
-    List<Meter> getAllMeters() {
-        return meterRepository.findAll();
+    Meter getMeter() {
+        Meter meter = meterRepository.findFirstByInstalledIsFalse();
+        meter.setInstalled(true);
+        meterRepository.save(meter);
+        return meter;
     }
 }
