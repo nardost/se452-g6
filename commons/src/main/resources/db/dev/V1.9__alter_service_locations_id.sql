@@ -1,1 +1,0 @@
-alter table service_locations alter column id type integer;

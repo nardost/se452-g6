@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name = "past_payments")
+@Table(name = "payments")
 public class PastPayment implements Serializable {
 
     @Id

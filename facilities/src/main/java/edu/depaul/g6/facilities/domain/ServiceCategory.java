@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 @Document(collection = "service_categories")
 public class ServiceCategory {
     @Id
+    private String id;
     private String category;
     private double tariff;
 }

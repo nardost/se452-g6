@@ -21,7 +21,7 @@ import lombok.*;
  */
 @Entity
 @Data
-@Table(name = "bill")
+@Table(name = "bills")
 public class Bill implements Serializable {
     /**
      * The auto-generated primary key, confers no semantic meaning.
