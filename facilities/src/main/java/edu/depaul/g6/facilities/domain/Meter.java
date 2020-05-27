@@ -6,13 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 
 @Data
-@Document(collection = "smart_meters")
+@Document(collection = "smartMeters")
 public class Meter {
 
     @Id
     private String id;
-
-    private String macAddress;
-    private String manufacturer;
+    private String mac;
     private String model;
+    private String manufacturer;
+    private boolean installed;
 }

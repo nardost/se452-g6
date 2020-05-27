@@ -1,5 +1,6 @@
 package edu.depaul.g6.facilities.service;
 
+import edu.depaul.g6.delivery.service.ActivationNotifier;
 import edu.depaul.g6.facilities.ServiceStatus;
 import edu.depaul.g6.facilities.domain.Subscription;
 import edu.depaul.g6.facilities.domain.Location;
@@ -20,6 +21,8 @@ public class SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
     private LocationService locationService;
+    private MeterService meterService;
+    private ActivationNotifier activationNotifier;
 
     @Autowired
     SubscriptionService(SubscriptionRepository repository) {
@@ -29,6 +32,16 @@ public class SubscriptionService {
     @Autowired
     void setLocationService(LocationService service) {
         this.locationService = service;
+    }
+
+    @Autowired
+    void setMeterService(MeterService service) {
+        this.meterService = service;
+    }
+
+    @Autowired
+    void setActivationNotifier(ActivationNotifier notifier) {
+        this.activationNotifier = notifier;
     }
 
     Subscription getSubscription(String accountNumber) {
@@ -66,7 +79,7 @@ public class SubscriptionService {
          * installed at the location? Get is from the
          * MeterService.
          */
-        final String MAC_ADDRESS = "xxxxyyyyzzzzaaaabbbb";
+        final String MAC_ADDRESS = meterService.getMeter().getMac();
         location.setMeterMacAddress(MAC_ADDRESS);
 
         /*
@@ -100,7 +113,12 @@ public class SubscriptionService {
         subscription.setServiceCategory(serviceType);
         subscription.setActivationTimeStamp(Timestamp.from(Instant.now()));
         subscription.setServiceStatus(status);
-
         saveSubscription(subscription);
+        /*
+         * What is the activation message and when should it be applied?
+         * ACTIVATE:ON_TIMESTAMP
+         */
+        final String ACTIVATION_MESSAGE = "activate:" + subscription.getActivationTimeStamp().toString();
+        activationNotifier.sendSignal(MAC_ADDRESS, ACTIVATION_MESSAGE);
     }
 }
