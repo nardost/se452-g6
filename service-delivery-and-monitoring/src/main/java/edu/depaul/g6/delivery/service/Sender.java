@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class Sender {
-
     private final RedisTemplate<String, String> redisTemplate;
     private final ChannelTopic channelTopic;
 
@@ -25,6 +24,6 @@ public class Sender {
     public void send(String message) {
         final String channel = channelTopic.getTopic();
         redisTemplate.convertAndSend(channel, message);
-        log.info(String.format("SENT [%s] %s", channel, message));
+        log.info(String.format("SENT TO [%s] %s", channel, message));
     }
 }

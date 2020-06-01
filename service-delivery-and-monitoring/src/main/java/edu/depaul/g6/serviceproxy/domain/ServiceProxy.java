@@ -1,10 +1,10 @@
 package edu.depaul.g6.serviceproxy.domain;
 
-import java.util.Date;
 import java.util.List;
-import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 import lombok.Data;
 
 
@@ -14,7 +14,8 @@ import lombok.Data;
  * @author Christian Kleinvehn
  */
 @Data
-@Document(collection = "meter_usage")
+@AllArgsConstructor
+@Document(collection = "meterUsage")
 public class ServiceProxy {
     @Id
     private String id;
@@ -23,23 +24,11 @@ public class ServiceProxy {
     /*
         _id: (String),
         usage: [
-            { timestamp: (ISODate), kwhUsed: (Integer) },
-            { timestamp: (ISODate), kwhused: (Integer) },
+            { from: (Timestamp), to: (Timestamp), kwhUsed: (Integer) },
+            { from: (Timestamp), to: (Timestamp), kwhUsed: (Integer) },
             .
             .
             .
         ]
      */
-}
-
-
-/**
- * A document representing the accumulated kWh for a meter at a specific point in time.
- *
- * @author Christian Kleinvehn
- */
-@Data
-class Usage {
-    private Date timestamp;
-    private Integer kwhUsed;
 }

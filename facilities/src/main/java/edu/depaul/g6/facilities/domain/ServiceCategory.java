@@ -11,5 +11,5 @@ public class ServiceCategory {
     @Id
     private String id;
     private String category;
-    private double tariff;
+    private Integer tariff;
 }

@@ -1,7 +1,7 @@
 package edu.depaul.g6.billing.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.*;
 import lombok.*;
 
@@ -33,17 +33,15 @@ public class Bill implements Serializable {
     /**
      * The date when the bill was issued.
      */
-    @Temporal(TemporalType.DATE)
     @Column(name = "billing_date", columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date billingDate;
+    private LocalDate billingDate;
 
 
     /**
      * The date when the bill is due.
      */
-    @Temporal(TemporalType.DATE)
-    @Column(name = "due_date", nullable = false)
-    private Date dueDate;
+    @Column(name = "due_date", nullable = false, columnDefinition = "DATE")
+    private LocalDate dueDate;
 
 
     /**

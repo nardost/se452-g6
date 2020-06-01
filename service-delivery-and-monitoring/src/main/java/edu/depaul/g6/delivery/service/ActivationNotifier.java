@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class ActivationNotifier {
-
     private final Sender sender;
 
     @Autowired
@@ -15,9 +14,11 @@ public class ActivationNotifier {
         this.sender = sender;
     }
 
-    /*
-     * This is not a scheduled job. It is
-     * called when an activation request comes.
+
+    /** This is not a scheduled job. It is called when an activation request comes.
+     *
+     * @param macAddress
+     * @param signal
      */
     public void sendSignal(final String macAddress, final String signal) {
         /*
