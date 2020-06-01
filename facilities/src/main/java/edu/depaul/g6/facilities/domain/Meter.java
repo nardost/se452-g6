@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Data
 @Document(collection = "smartMeters")
 public class Meter {
-
     @Id
     private String id;
     private String mac;
