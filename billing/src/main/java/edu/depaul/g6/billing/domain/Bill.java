@@ -7,15 +7,7 @@ import lombok.*;
 
 
 /**
- * This entity represents a bill of a customer.
- * <p>
- *     A bill entity has:
- *     <ul>
- *         <li>an ID (primary key)</li>
- *         <li>the associated utility's ID</li>
- *         <li>the date when it was sent out</li>
- *         <li>a flag recording its status (true if paid, false if unpaid)</li>
- *     </ul>
+ * This entity represents the bill of a customer.
  *
  * @author Christian Kleinvehn
  */
@@ -35,7 +27,7 @@ public class Bill implements Serializable {
      * The corresponding utility associated with the bill.
      */
     @Column(name = "account_number", nullable = false)
-    private String utilityId;
+    private String accountNumber;
 
 
     /**
@@ -47,8 +39,23 @@ public class Bill implements Serializable {
 
 
     /**
+     * The date when the bill is due.
+     */
+    @Temporal(TemporalType.DATE)
+    @Column(name = "due_date", nullable = false)
+    private Date dueDate;
+
+
+    /**
+     * The amount due.
+     */
+    @Column(name = "amount", nullable = false)
+    private Integer amount;
+
+
+    /**
      * The paid status of the bill (true if paid, false if unpaid).
      */
-    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private Boolean paidStatus;
+    @Column(name = "paid", columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
+    private Boolean paid;
 }
