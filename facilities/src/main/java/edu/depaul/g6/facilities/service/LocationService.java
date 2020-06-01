@@ -34,4 +34,6 @@ class LocationService {
     void saveLocation(Location location) {
         locationRepository.save(location);
     }
+
+    Location getLocationByMacAddress(String macAddress) { return locationRepository.findByMeterMacAddress(macAddress); }
 }

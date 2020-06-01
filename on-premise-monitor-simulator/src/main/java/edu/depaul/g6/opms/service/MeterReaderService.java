@@ -24,7 +24,7 @@ public class MeterReaderService {
         this.sender = sender;
     }
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 30000) // 30 seconds
     public void sendUsageData() {
         /*
          *TODO

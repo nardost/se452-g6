@@ -64,8 +64,8 @@ public class Facilities {
         return (zipCode == null) ? getAllLocations() : getAllLocationsInZipCode(zipCode);
     }
 
-    public ServiceCategory getCategory(String id) {
-        return serviceCategoryService.getCategory(id);
+    public ServiceCategory getCategory(String accountNumber) {
+        return serviceCategoryService.getByCategory(getSubscription(accountNumber).getServiceCategory());
     }
 
     public List<ServiceCategory> getAllCategories() {
@@ -88,5 +88,9 @@ public class Facilities {
     public List<String> getStatesServed() {
         final String[] STATES_SERVED = new String[] { "IL", "IN", "WI" };
         return Stream.of(STATES_SERVED).collect(Collectors.toList());
+    }
+
+    public String getAccountIdByMacAddress(String macAddress) {
+        return subscriptionService.getByLocation(locationService.getLocationByMacAddress(macAddress)).getId();
     }
 }

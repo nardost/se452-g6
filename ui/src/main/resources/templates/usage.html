@@ -4,27 +4,17 @@
     <body>
         <div th:replace="fragments :: banner-and-navbar"></div>
         <div class="container">
-            <h1 class="display-5" th:inline="text">[[${#lists.size(meters)}]] meter[[${#lists.size(meters) != 1 ? "s" : ""}]] found.</h1>
+            <h1 class="display-5">Your meter usage.</h1>
             <table class="table table-striped">
                 <tr>
-                    <th>Meter</th>
-                    <th>Usage Data</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>kWh Used</th>
                 </tr>
-                <tr th:each="meter : ${meters}">
-                    <td th:text="${meter.id}"></td>
-                    <td>
-                        <table style="display: inline-table;">
-                            <tr>
-                                <th>Timestamp</th>
-                                <th>kWh Used</th>
-                            </tr>
-                            <tr th:each="usageData : ${meter.usage}">
-                                <td th:text="${usageData.timestamp}"></td>
-                                <td th:text="${usageData.kwhUsed}"></td>
-                            </tr>
-                        </table>
-                    </td>
-                    </table>
+                <tr th:each="usageData : ${meter.usage}">
+                    <td th:text="${#temporals.format(T(java.time.Instant).parse(usageData.from), 'MMM d, yyyy HH:mm:ss', #locale)}"></td>
+                    <td th:text="${#temporals.format(T(java.time.Instant).parse(usageData.to), 'MMM d, yyyy HH:mm:ss', #locale)}"></td>
+                    <td th:text="${usageData.kwhUsed}"></td>
                 </tr>
             </table>
         </div>

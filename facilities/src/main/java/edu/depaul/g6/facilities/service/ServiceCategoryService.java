@@ -24,4 +24,5 @@ public class ServiceCategoryService {
     List<ServiceCategory> getAllCategories() {
         return serviceCategoryRepository.findAll();
     }
+    ServiceCategory getByCategory(String category) { return serviceCategoryRepository.findByCategory(category); }
 }

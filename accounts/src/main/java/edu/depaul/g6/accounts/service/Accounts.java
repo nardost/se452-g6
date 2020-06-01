@@ -54,11 +54,10 @@ public class Accounts {
 
     }
      */
-    //TODO This will move out into accounts
+
     private SubscriberService subscriberService;
     private AccountService accountService;
 
-    //TODO This will move out into accounts
     @Autowired
     public void setSubscriberService(SubscriberService service) {
         this.subscriberService = service;
@@ -67,12 +66,10 @@ public class Accounts {
         this.accountService = service;
     }
 
-    //TODO This will move out into accounts
     public String saveSubscriber(Subscriber s) throws NoSuchAlgorithmException {
         return subscriberService.saveSubscriber(s);
     }
 
-    //TODO This will move out into accounts
     public Account getAccount(String accountNumber) {
         return accountService.getAccount(accountNumber);
     }
