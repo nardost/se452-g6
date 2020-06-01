@@ -11,7 +11,7 @@
                     <th>Account #</th>
                     <th>Issue Date</th>
                     <th>Due Date</th>
-                    <th>Amount</th>
+                    <th>Amount Due</th>
                     <th>Paid?</th>
                 </tr>
                 <tr th:each="bill : ${bills}">
@@ -19,8 +19,8 @@
                     <td th:text="${bill.accountNumber}"></td>
                     <td th:text="${bill.billingDate}"></td>
                     <td th:text="${bill.dueDate}"></td>
-                    <td th:text="${bill.amount}"></td>
-                    <td th:text="${bill.paidStatus ? 'Yes' : 'No'}"></td>
+                    <td th:inline="text">$[[${bill.amount}]]</td>
+                    <td th:text="${bill.paid ? 'Yes' : 'No'}"></td>
                 </tr>
             </table>
         </main>

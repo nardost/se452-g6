@@ -121,4 +121,6 @@ public class SubscriptionService {
         final String ACTIVATION_MESSAGE = "activate:" + subscription.getActivationTimeStamp().toString();
         activationNotifier.sendSignal(MAC_ADDRESS, ACTIVATION_MESSAGE);
     }
+
+    Subscription getByLocation(Location l) { return subscriptionRepository.findByLocation(l); }
 }

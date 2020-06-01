@@ -1,6 +1,7 @@
 package edu.depaul.g6.ui.config;
 
 import edu.depaul.g6.delivery.service.Receiver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,11 @@ public class RedisConfiguration {
 
     @Value("${spring.redis.password}")
     private String redisPassword;
+
+    Receiver receiver;
+
+    @Autowired
+    public void setReceiver(Receiver receiver) { this.receiver = receiver; }
 
     @Bean
     public LettuceConnectionFactory lettuceConnectionFactory() {
@@ -62,7 +68,7 @@ public class RedisConfiguration {
     RedisMessageListenerContainer listenerContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(lettuceConnectionFactory());
-        container.addMessageListener(new MessageListenerAdapter(new Receiver()), receiveChannelTopic());
+        container.addMessageListener(new MessageListenerAdapter(receiver), receiveChannelTopic());
         container.setTaskExecutor(Executors.newFixedThreadPool(10));
         return container;
     }
