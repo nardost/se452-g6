@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface BillRepository extends JpaRepository<Bill, Long> {
-    List<Bill> findAllByUtilityId(String account); // user can have 0+ bills
+    List<Bill> findAllByAccountNumber(String account); // user can have 0+ bills
 }

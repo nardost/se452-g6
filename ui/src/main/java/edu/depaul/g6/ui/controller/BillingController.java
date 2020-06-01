@@ -23,7 +23,7 @@ public class BillingController {
         G6UserPrincipal user =
                 (G6UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        List<Bill> bills = repo.findAllByUtilityId(user.getAccountId());
+        List<Bill> bills = repo.findAllByAccountNumber(user.getAccountId());
         model.addAttribute("bills", bills);
         return "bills";
     }
