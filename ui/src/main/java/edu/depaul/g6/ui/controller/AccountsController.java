@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
@@ -56,12 +59,6 @@ public class AccountsController {
     }
 
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        return "logout";
-    }
-
-
     @GetMapping("/subscribe")
     public String showSubscriptionForm(Model model) {
         Subscriber subscriber = new Subscriber();
@@ -75,49 +72,52 @@ public class AccountsController {
 
 
     @PostMapping("/subscribe")
-    public String subscribe(@Valid @ModelAttribute Subscriber subscriber,
-                            BindingResult bindingResult, Model model) {
+    public ModelAndView subscribe(@Valid @ModelAttribute Subscriber subscriber,
+                            BindingResult bindingResult, Model model) throws NoSuchAlgorithmException {
         /*
          * (1) Take subscription form input from user.
          * (2) Generate account id.
          * (3) Send activation request to facilities.
          * (4) Confirm to user that activation is pending.
          */
-        try {
-            final String accountNumber;
-            accountNumber = accounts.saveSubscriber(subscriber);
-            log.info("The new account number is " + accountNumber);
-            log.info(subscriber.getFirstName() + " " + subscriber.getLastName());
-            log.info(subscriber.getEmail());
-            log.info(subscriber.getStreetAddress() + ", " + subscriber.getCity());
-            log.info(subscriber.getMm());
-            log.info(subscriber.getServiceType());
-            Account account = accounts.getAccount(accountNumber);
-            model.addAttribute("account", account);
+        final String accountNumber;
+        accountNumber = accounts.saveSubscriber(subscriber);
+        log.info("The new account number is " + accountNumber);
+        log.info(subscriber.getFirstName() + " " + subscriber.getLastName());
+        log.info(subscriber.getEmail());
+        log.info(subscriber.getStreetAddress() + ", " + subscriber.getCity());
+        log.info(subscriber.getMm());
+        log.info(subscriber.getServiceType());
+        Account account = accounts.getAccount(accountNumber);
+        model.addAttribute("account", account);
 
-            // EXPERIMENTING - CHRISTIAN
-            // logs in the user programmatically after registration
-            G6UserPrincipal user = new G6UserPrincipal(account, subscriber);
-            Authentication auth =
-                    new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            // EXPERIMENTING
+        // logs in the user programmatically after registration
+        G6UserPrincipal user = new G6UserPrincipal(account, subscriber);
+        Authentication auth =
+                new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
-            return "password-reset";
-        } catch (NoSuchAlgorithmException nsae) {
-            /*
-             * Redirect to error page 5XX - Internal Server Error
-             */
-            log.error("NoSuchAlgorithmException thrown. Check the hashing algorithm.");
-            return "index";
-        }
+        return new ModelAndView("redirect:/password-reset?created");
     }
+
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
+    }
+
 
     @Autowired
     private AccountRepository accountRepository;
 
+    @GetMapping("/password-reset")
+    public String passwordReset(@AuthenticationPrincipal UserDetails user, Model model) {
+        model.addAttribute("account", accountRepository.findByEmail(user.getUsername()));
+        return "password-reset";
+    }
+
     @PostMapping("/password-reset")
-    public String subscribe(@Valid @ModelAttribute Account account,
+    public String passwordReset(@Valid @ModelAttribute Account account,
                             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.info("There was an error binding.");
@@ -131,8 +131,8 @@ public class AccountsController {
     }
 
 
-    @GetMapping("/account-details")
+    @GetMapping("/user/account-details")
     public String accountDetails() {
-        return "account-details"; // can probably just do everything from Thymeleaf as it can access the principal
+        return "account-details";
     }
 }

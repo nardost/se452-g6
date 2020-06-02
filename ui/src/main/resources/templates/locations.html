@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head-tag"></head>
-<body>
-<div th:replace="fragments :: banner-and-navbar" />
-<div class="container">
-    <h1 class="h1" th:inline="text">[[${#lists.size(locations)}]] locations found.</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Street Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip Code</th>
-        </tr>
-        <tr th:each="location : ${locations}">
-            <td th:text="${location.streetAddress}" />
-            <td th:text="${location.city}" />
-            <td th:text="${location.state}" />
-            <td th:text="${location.zipCode}" />
-        </tr>
-    </table>
-</div>
-<div th:replace="fragments :: footer" />
-</body>
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container">
+            <h1 class="h1" th:inline="text">[[${#lists.size(locations)}]] location[[${#lists.size(locations) != 1 ? "s" : ""}]] found.</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                </tr>
+                <tr th:each="location : ${locations}">
+                    <td th:text="${location.streetAddress}" />
+                    <td th:text="${location.city}" />
+                    <td th:text="${location.state}" />
+                    <td th:text="${location.zipCode}" />
+                </tr>
+            </table>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
 </html>

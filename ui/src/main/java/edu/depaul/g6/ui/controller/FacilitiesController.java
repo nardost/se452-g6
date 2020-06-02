@@ -24,7 +24,7 @@ public class FacilitiesController {
         this.facilities = f;
     }
 
-    @GetMapping("/locations")
+    @GetMapping("/admin/locations")
     public String locations(@RequestParam(required = false) Integer zipCode,  Model model) {
 
         List<Location> locations = facilities.getLocations(zipCode);
@@ -33,20 +33,13 @@ public class FacilitiesController {
         return "locations";
     }
 
-    @GetMapping("/service-categories")
+    @GetMapping("/admin/service-categories")
     public String serviceCategories(Model model) {
         model.addAttribute("categories", facilities.getAllCategories());
         return "service-categories";
     }
 
-    @GetMapping("/subscription")
-    public String subscription(@RequestParam String accountNumber, Model model) {
-        Subscription subscription = facilities.getSubscription(accountNumber);
-        model.addAttribute("subscription", subscription);
-        return "subscription";
-    }
-
-    @GetMapping("/subscriptions")
+    @GetMapping("/admin/subscriptions")
     public String subscriptions(Model model) {
         List<Subscription> subscriptions = facilities.getAllSubscriptions();
         model.addAttribute("subscriptions", subscriptions);
