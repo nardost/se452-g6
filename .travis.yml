@@ -1,2 +1,15 @@
 language: java
 jdk: oraclejdk11
+env:
+  - SPRING_PROFILES_ACTIVE=prod
+  - POSTGRES_URI_AWS='g6db.c71xnrodprwu.us-east-2.rds.amazonaws.com'
+  - POSTGRES_PORT_AWS=5432
+  - POSTGRES_DB_AWS=g6db
+  - POSTGRES_USERNAME_AWS=g6
+  - POSTGRES_PASSWORD_AWS=se452-g6
+  - MONGODB_USERNAME_ATLAS=g6
+  - MONGODB_PASSWORD_ATLAS=se452-g6
+  - MONGODB_CLUSTER_URI_ATLAS='cluster0-jpaus.mongodb.net/g6db?retryWrites=true&w=majority'
+  - REDIS_CLOUD_HOST=redis-13480.c99.us-east-1-4.ec2.cloud.redislabs.com
+  - REDIS_CLOUD_PORT=13480
+  - REDIS_CLOUD_PASSWORD=McaFiGID8pft40LNrEDowyGEX52MM4Ul
