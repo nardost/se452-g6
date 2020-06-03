@@ -1,4 +1,4 @@
-# G6 Utilities
+# G6 Utilities [![Build Status](https://travis-ci.org/nardost/se452-g6.svg?branch=master)](https://travis-ci.org/nardost/se452-g6)
 
 ## A Utility Services Management & Billing System
 
