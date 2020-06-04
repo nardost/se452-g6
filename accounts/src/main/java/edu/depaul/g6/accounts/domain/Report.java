@@ -11,7 +11,11 @@ import java.util.Date;
 public class Report {
 
     @Id
-    private Integer id;
-    private Date outageDate;
+    private String outageDate;
     private String comment;
+    private String streetAddress;
+    private String city;
+    private String state;
+    private Integer zipCode;
+    private Boolean activeOutage;
 }
