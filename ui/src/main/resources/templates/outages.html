@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head th:replace="fragments :: head-tag"></head>
+<body>
+
+<div th:replace="fragments :: banner-and-navbar" />
+<div class="container">
+    <div class = "outage-report">
+        <h1 class="display-name" >Outage Reports</h1>
+        <h2 th:inline="text">[[${#lists.size(reports)}]] Outages found</h2>
+        <table class="table altered">
+            <tr>
+                <th>Outage Date</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Active Outage</th>
+                <th>Comments</th>
+            </tr>
+            <tr th:each="report : ${reports}">
+                <td th:text="${report.outageDate}"></td>
+                <td th:text="${report.streetAddress}"></td>
+                <td th:text="${report.city}"></td>
+                <td th:text="${report.state}"></td>
+                <td th:text="${report.zipCode}"></td>
+                <td th:text="${report.activeOutage}"></td>
+                <td th:text="${report.comment}"></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>

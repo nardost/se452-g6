@@ -4,6 +4,9 @@ import edu.depaul.g6.accounts.repository.AccountRepository;
 import edu.depaul.g6.accounts.service.Accounts;
 import edu.depaul.g6.accounts.domain.Account;
 import edu.depaul.g6.accounts.domain.Subscriber;
+import edu.depaul.g6.accounts.service.OutageReportService;
+import edu.depaul.g6.accounts.domain.Report;
+import edu.depaul.g6.accounts.repository.OutageReportRepository;
 import edu.depaul.g6.commons.Utilities;
 import edu.depaul.g6.facilities.service.Facilities;
 import edu.depaul.g6.ui.config.G6UserPrincipal;
@@ -61,6 +64,18 @@ public class AccountsController {
         return "logout";
     }
 
+    /*
+    @GetMapping("/outages")
+    public String outages() {
+        return "outages";
+    }
+     */
+
+    @GetMapping("/outages")
+    public String outageReport(Model model) {
+       model.addAttribute("reports", accounts.getAllReports());
+        return "outages";
+    }
 
     @GetMapping("/subscribe")
     public String showSubscriptionForm(Model model) {
