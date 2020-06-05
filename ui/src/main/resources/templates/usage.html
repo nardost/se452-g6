@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments :: head-tag"></head>
     <body>
-        <div th:replace="fragments :: banner-and-navbar"></div>
-        <div class="container">
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container">
             <h1 class="display-5">Your meter usage.</h1>
             <table class="table table-striped">
                 <tr>
@@ -17,7 +17,7 @@
                     <td th:text="${usageData.kwhUsed}"></td>
                 </tr>
             </table>
-        </div>
-        <div th:replace="fragments :: footer"></div>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
     </body>
 </html>

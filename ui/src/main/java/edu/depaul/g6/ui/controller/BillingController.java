@@ -18,7 +18,7 @@ public class BillingController {
     @Autowired
     BillRepository repo;
 
-    @GetMapping("/bills")
+    @GetMapping("/user/bills")
     public String bills(Model model) {
         G6UserPrincipal user =
                 (G6UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

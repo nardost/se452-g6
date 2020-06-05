@@ -29,23 +29,19 @@ public class BillGenerator {
     @Scheduled(fixedDelay = 60000) // every min
     void generateBill() {
         Map<String, Integer> usageReport = service.getUsageReport(); // mac address -> kWh since last invocation
-        if (usageReport == null) log.info("Bad news");
 
         for (String mac : usageReport.keySet()) {
             String accountId;
 
-            log.info(mac);
-            log.info("" + usageReport.get(mac));
             try { accountId = facilities.getAccountIdByMacAddress(mac); }
             catch (NullPointerException e) { continue; } // this function becomes an issue when you mock the data
-            log.info(accountId);
 
             ServiceCategory category = facilities.getCategory(accountId);
 
             Bill bill = new Bill();
             bill.setAccountNumber(accountId);
             bill.setPaid(false);
-            bill.setAmount(usageReport.get(mac) * category.getTariff());
+            bill.setAmount((int)(usageReport.get(mac) * (category.getTariff() / 100.00)));
             bill.setBillingDate(LocalDate.now());
             bill.setDueDate(LocalDate.now().plusDays(30));
             repo.save(bill);

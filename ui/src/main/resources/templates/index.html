@@ -5,7 +5,7 @@
     <head>
         <!-- a way to include the head fragment without overriding this head... a bit hacky -->
         <head th:include="fragments :: head-tag"></head>
-        <link href="styles/index.css" rel="stylesheet" />
+        <link href="/styles/index.css" rel="stylesheet" />
     </head>
     <body>
         <header th:replace="fragments :: banner-and-navbar"></header>
@@ -38,13 +38,17 @@
                     <br>
                     <input class="btn btn-primary" type="submit" value="Sign In" />
                     <br>
-                    <a href="subscribe"><button type="button" class="btn btn-secondary">Not Yet Subscribed?</button></a>
+                    <a href="/subscribe"><button type="button" class="btn btn-secondary">Not Yet Subscribed?</button></a>
                 </form>
             </div>
 
             <!-- AUTHENTICATED -->
-            <div sec:authorize="isAuthenticated()" class="text-center">
+            <div sec:authorize="hasRole('USER')" class="text-center">
                 <h1>Welcome <span sec:authentication="principal.firstName"></span>.</h1>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')" class="text-center">
+                <h1>Welcome to your admin dashboard.</h1>
             </div>
         </main>
 

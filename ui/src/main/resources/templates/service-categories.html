@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head-tag"></head>
-<body>
-<div th:replace="fragments :: banner-and-navbar" />
-<div class="container">
-    <h1 class="h1" th:inline="text">[[${#lists.size(categories)}]] categories found.</h1>
-    <table class="table table-striped">
-        <tr><th>CATEGORY</th><th>TARIFF</th></tr>
-        <tr th:each="a_category : ${categories}">
-            <td th:text="${a_category.category}"></td>
-            <td th:inline="text">[[${a_category.tariff}]] USD/kWh</td>
-        </tr>
-    </table>
-</div>
-<div th:replace="fragments :: footer" />
-</body>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container">
+            <h1 class="h1" th:inline="text">[[${#lists.size(categories)}]] [[${#lists.size(categories) != 1 ? "categories" : "category"}]] found.</h1>
+            <table class="table table-striped">
+                <tr><th>Category</th><th>Tariff</th></tr>
+                <tr th:each="a_category : ${categories}">
+                    <td th:text="${a_category.category}"></td>
+                    <td th:inline="text">[[${a_category.tariff}]]&cent;/kWh</td>
+                </tr>
+            </table>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
 </html>
