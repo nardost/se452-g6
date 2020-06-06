@@ -5,7 +5,7 @@
     <head>
         <!-- a way to include the head fragment without overriding this head... a bit hacky -->
         <head th:include="fragments :: head-tag"></head>
-        <link href="styles/index.css" rel="stylesheet" />
+        <link href="/styles/index.css" rel="stylesheet" />
         <style>
             tr:nth-of-type(even) td:nth-of-type(2) {
                 opacity: .9;
@@ -21,9 +21,9 @@
     <body>
         <header th:replace="fragments :: banner-and-navbar"></header>
 
-        <main class="container">
+        <main class="container" style="flex-direction: column">
             <div>
-                <h1 class="mb-4">Hi <span sec:authentication="principal.firstName"></span> <span sec:authentication="principal.lastName"></span>.</h1>
+                <h1 class="mb-4" style="text-align: center;">Hi <span sec:authentication="principal.firstName"></span> <span sec:authentication="principal.lastName"></span>.</h1>
                 <table class="table table-striped table-dark">
                     <tr>
                         <td>Account ID</td>
@@ -46,6 +46,7 @@
                     </tr>
                 </table>
             </div>
+            <a href="/password-reset"><button type="button" class="btn btn-secondary">Reset Your Password</button></a>
         </main>
 
         <footer th:replace="fragments :: footer"></footer>

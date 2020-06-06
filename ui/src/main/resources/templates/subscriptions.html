@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head-tag"></head>
-<body>
-<div th:replace="fragments :: banner-and-navbar" />
-<div class="container">
-    <h1 class="h1" th:inline="text">[[${#lists.size(subscriptions)}]] subscriptions found.</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Account #</th>
-            <th>Service Status</th>
-            <th>Activation Timestamp</th>
-        </tr>
-        <tr th:each="subscription, iStat : ${subscriptions}">
-            <td th:text="${subscription.id}" />
-            <td th:text="${subscription.serviceStatus}" />
-            <td th:text="${subscription.activationTimeStamp}" />
-        </tr>
-    </table>
-</div>
-<div th:replace="fragments :: footer" />
-</body>
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container">
+            <h1 class="h1" th:inline="text">[[${#lists.size(subscriptions)}]] subscription[[${#lists.size(subscriptions) != 1 ? "s" : ""}]] found.</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Account #</th>
+                    <th>Service Status</th>
+                    <th>Activation Timestamp</th>
+                </tr>
+                <tr th:each="subscription, iStat : ${subscriptions}">
+                    <td th:text="${subscription.id}" />
+                    <td th:text="${subscription.serviceStatus}" />
+                    <td th:text="${subscription.activationTimeStamp}" />
+                </tr>
+            </table>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
 </html>

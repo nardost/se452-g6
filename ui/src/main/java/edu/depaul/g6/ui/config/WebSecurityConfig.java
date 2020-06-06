@@ -22,23 +22,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/", "/subscribe", "/password-reset").permitAll()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .antMatchers("/*").hasRole("USER") // every other page
+            .antMatchers("/").permitAll()
+            .antMatchers("/subscribe").anonymous()
+            .antMatchers("/password-reset", "/logout").authenticated()
+            .antMatchers("/admin/*").hasRole("ADMIN")
+            .antMatchers("/user/*").hasRole("USER")
             .and()
 
         .formLogin()
             .loginPage("/")
-            .successHandler(new G6AuthenticationSuccessHandler()) // redirects ADMINs to /admin/, USERs to /
+            .defaultSuccessUrl("/")
             .and()
 
         .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // doesn't need to be mapped w/ a controller
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .clearAuthentication(true)
             .deleteCookies("JSESSIONID")
             .invalidateHttpSession(true)
-            .logoutSuccessUrl("/?logout")
-            .permitAll();
+            .logoutSuccessUrl("/?logout");
     }
 
 

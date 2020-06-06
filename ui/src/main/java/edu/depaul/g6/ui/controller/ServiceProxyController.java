@@ -23,7 +23,7 @@ public class ServiceProxyController {
     @Autowired
     private SubscriptionRepository subscriptionRepo;
 
-    @GetMapping("/usage")
+    @GetMapping("/user/usage")
     public String usage(Model model, @AuthenticationPrincipal G6UserPrincipal user) {
         Subscription subscription = subscriptionRepo.findById(user.getAccountId()).get();
         ServiceProxy service = serviceRepo.findById(subscription.getLocation().getMeterMacAddress()).get();
