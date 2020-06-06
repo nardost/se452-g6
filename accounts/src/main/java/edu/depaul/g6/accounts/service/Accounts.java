@@ -2,9 +2,12 @@ package edu.depaul.g6.accounts.service;
 
 //Data
 import edu.depaul.g6.accounts.domain.Account;
+import edu.depaul.g6.accounts.domain.Report;
 import edu.depaul.g6.accounts.domain.Subscriber;
 import edu.depaul.g6.accounts.repository.UserRepository;
+import edu.depaul.g6.accounts.repository.OutageReportRepository;
 import edu.depaul.g6.accounts.domain.UserProfile;
+import edu.depaul.g6.facilities.domain.ServiceCategory;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,17 +16,32 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 
 @Service
 public class Accounts {
 
     private UserRepository userRepository;
+    private OutageReportService outageReportService;
 
     @Autowired
     public Accounts(UserRepository userRepository){
         this.userRepository = userRepository;
     };
+
+    @Autowired
+    public void setOutageReportService(OutageReportService service){
+        this.outageReportService = service;
+    }
+
+    public List<Report> getAllReports() {
+        return outageReportService.getAllOutageReports();
+    }
+
+    Report getReportByZipCode(Integer zipCode){
+        return outageReportService.getReportByZipCode(zipCode);
+    }
 
     public void updateName(String newFullname){
 

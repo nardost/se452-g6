@@ -58,6 +58,16 @@ public class AccountsController {
         return "index";
     }
 
+    @GetMapping("/outages")
+    public String outageReport(Model model) {
+        model.addAttribute("reports", accounts.getAllReports());
+        return "outages";
+    }
+
+    @GetMapping("/report-outage")
+    public String reportOutage(Model model) {
+        return "report-outage";
+    }
 
     @GetMapping("/subscribe")
     public String showSubscriptionForm(Model model) {
