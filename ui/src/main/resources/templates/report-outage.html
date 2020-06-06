@@ -1,57 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
-<head th:replace="fragments :: head-tag"></head>
-<meta charset="UTF-8">
-<title>Submit Outage</title>
-</head>
-<body>
-<div th:replace="fragments :: banner-and-navbar" />
-<div class = "container">
-    <h1 class="display-2">Report an Outage</h1>
-    <form>
-        <fieldset class ="form-group">
-            <legend>Outage Information</legend>
-            <div class ="form-row">
-                <label>Outage Date</label>
-                <input type = "text" class="form-control" placeholder="MM/DD/YYYY" required />
-            </div>
-            <div class ="form-row">
-                <label>Street Address</label>
-                <input type = "text" class="form-control" placeholder="Street Address" required />
-            </div>
-            <div class ="form-row">
-                <label>City</label>
-                <input type = "text" class="form-control" placeholder="City" required />
-            </div>
-            <div class ="form-row">
-                <label>State</label>
-                <input type = "text" class="form-control" placeholder="State" required />
-            </div>
-            <div class ="form-row">
-                <label>Zip Code</label>
-                <input type = "text" class="form-control" placeholder="Zip Code" required />
-            </div>
-            <div class ="form-row">
-                <label>Description</label>
-                <input type = "text" class="form-control" placeholder="Tell us more about it" required />
-            </div>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <div th:replace="fragments :: banner-and-navbar" />
+        <div class = "container">
+            <h1 class="display-2">Report an Outage</h1>
+            <form>
+                <fieldset class ="form-group">
+                    <legend>Outage Information</legend>
+                    <div class ="form-row">
+                        <label>Outage Date</label>
+                        <input type = "text" class="form-control" placeholder="MM/DD/YYYY" required />
+                    </div>
+                    <div class ="form-row">
+                        <label>Street Address</label>
+                        <input type = "text" class="form-control" placeholder="Street Address" required />
+                    </div>
+                    <div class ="form-row">
+                        <label>City</label>
+                        <input type = "text" class="form-control" placeholder="City" required />
+                    </div>
+                    <div class ="form-row">
+                        <label>State</label>
+                        <input type = "text" class="form-control" placeholder="State" required />
+                    </div>
+                    <div class ="form-row">
+                        <label>Zip Code</label>
+                        <input type = "text" class="form-control" placeholder="Zip Code" required />
+                    </div>
+                    <div class ="form-row">
+                        <label>Description</label>
+                        <input type = "text" class="form-control" placeholder="Tell us more about it" required />
+                    </div>
 
-           <!-- are we doing active outage as well? -->
+                </fieldset>
 
-        </fieldset>
-        
-        <!--
-            TODO: need to create a button to link oup report-outage page
-            TODO: post information to document
+                <button type="submit" class="btn btn-primary">Submit Report</button>
+            </form>
 
-        -->
-
-        <button type="submit" class="btn btn-primary">Submit Report</button>
-    </form>
-
-
-</div>
-
-
-</body>
+        </div>
+    </body>
 </html>
