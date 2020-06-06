@@ -1,10 +1,10 @@
 package edu.depaul.g6.opms.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-
+import java.sql.Timestamp;
+import java.time.Instant;
 
 
 @Component
@@ -12,7 +12,7 @@ public class Meter implements Serializable {
 
     public static Meter NOT_FOUND = new Meter();
 
-    public enum meterStatus {
+    public enum MeterStatus {
         ACTIVE,
         UNACTIVE
     }
@@ -20,12 +20,17 @@ public class Meter implements Serializable {
     //@Autowired // Getting Error with @Autowired
     public String macAddress;
     //@Autowired // Getting Error with @Autowired
+    public String timeOfLastMeterReading;
+    //@Autowired // Getting Error with @Autowired
     public String powerUsage;
     //@Autowired // Getting Error with @Autowired\
-    public meterStatus status;
+    public MeterStatus status;
 
-    public void Meter(){this.macAddress = "00:00:00:00:00:00"; this.powerUsage = "000000000000";}
-    public void Meter(String macAddressIn, String powerUsageIn){this.macAddress = macAddressIn; this.powerUsage = powerUsageIn;}
+    public Meter(){this.macAddress = "00:00:00:00:00:00"; this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString(); this.powerUsage = "000000000000"; status = MeterStatus.ACTIVE;}
+    public Meter(String macAddressIn){this.macAddress = macAddressIn; this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString(); this.powerUsage = "000000000000"; status = MeterStatus.ACTIVE;}
 
+    public void updateStatus(MeterStatus meterStatus){
+        this.status = meterStatus;
+    }
 
 }
