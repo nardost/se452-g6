@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * @author nardos
@@ -21,15 +22,17 @@ import java.util.Objects;
 public class MeterReaderService {
 
     private final Sender sender;
-    private MeterManager meterManager;
+    private final Receiver receiver;
+    public MeterManager meterManager;
 
     @Autowired
-    public MeterReaderService(Sender sender) {
-        this.sender = sender;
-        this.meterManager = new MeterManager();
-        this.meterManager.addMeter("01:23:45:67:89:ab");
-        this.meterManager.addMeter("a1:23:45:67:89:ab");
-        this.meterManager.addMeter("b1:23:45:67:89:ab");
+    public MeterReaderService(Sender senderIn, Receiver receiverIn) {
+        this.sender = senderIn;
+        this.receiver = receiverIn;
+        this.meterManager = MeterManager.getInstance();
+        this.meterManager.addMeter("01-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
+        this.meterManager.addMeter("a1-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
+        this.meterManager.addMeter("b1-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
         meterManager.printMeterList();
     }
 
@@ -49,19 +52,7 @@ public class MeterReaderService {
 
     @Scheduled(fixedDelay = 2000)
     public void sendUsageData() {
-        /*
-         *TODO
-         * This message should be the usage data formatted in some way.
-         * Example: mac-address:from-timestamp:to-timestamp:wattage
-         */
-
-        //final String message = Timestamp.from(Instant.now()).toString();
-
-
-        //meterManager.printMeterList();
         final String message = meterManager.getAllMeterData();
-        //meterManager.printMeterList();
-        //if(message.isEmpty()){ log.info(String.format("message is Empty\n"));}
         sender.send(message);
     }
 }

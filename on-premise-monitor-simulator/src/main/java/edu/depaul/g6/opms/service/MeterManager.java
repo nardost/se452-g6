@@ -5,17 +5,27 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class MeterManager implements Serializable {
 
     List<Meter> meterList;
 
-    public MeterManager(){this.meterList = new ArrayList<Meter>();}
+    private static MeterManager instance = new MeterManager();
 
-    public void addMeter(String macAddress){
-        Meter meterToAdd = new Meter(macAddress);
+    public static MeterManager getInstance() {
+        return instance;
+    }
+
+    @Autowired
+    private MeterManager(){this.meterList = new ArrayList<Meter>();}
+
+    public void addMeter(String macAddress, String powerUsage){
+        Meter meterToAdd = new Meter(macAddress, powerUsage);
         this.meterList.add(meterToAdd);
     }
 
@@ -27,6 +37,24 @@ public class MeterManager implements Serializable {
         }
     }
 
+    public void activateMeter(String macAddress){
+        Meter m = findByMacAddress(macAddress);
+        if( m == Meter.NOT_FOUND)
+        {
+            addMeter(macAddress, Integer.toString(this.simulatedEnergyUsage()));
+        }
+        else {
+            m.Activate();
+        }
+    }
+
+    public void deactivateMeter(String macAddress){
+        Meter m = findByMacAddress(macAddress);
+        if( m != Meter.NOT_FOUND)
+        {
+            m.Deactivate();
+        }
+    }
 
     public Meter findByMacAddress(String macAddress){
         for(Meter meter : meterList){
@@ -49,7 +77,12 @@ public class MeterManager implements Serializable {
         return allMeterData;
     }
 
-
+    public int simulatedEnergyUsage() {
+        int usedEnergy = 0;
+        Random rand = new Random();
+        usedEnergy += rand.nextInt(20) * 50;
+        return usedEnergy;
+    }
 
     public void updateStatus(String macAddress, Meter.MeterStatus status){
         Meter m = findByMacAddress(macAddress);
