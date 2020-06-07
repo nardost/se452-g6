@@ -8,21 +8,20 @@ import java.util.List;
 import java.util.Random;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class MeterManager implements Serializable {
 
     List<Meter> meterList;
 
-    private static MeterManager instance = new MeterManager();
+    private static final MeterManager instance = new MeterManager();
 
-    public static MeterManager getInstance() {
+    public static synchronized MeterManager getInstance() {
         return instance;
     }
 
-    @Autowired
-    private MeterManager(){this.meterList = new ArrayList<Meter>();}
+    //@Autowired
+    private MeterManager(){this.meterList = new ArrayList<>();}
 
     public void addMeter(String macAddress, String powerUsage){
         Meter meterToAdd = new Meter(macAddress, powerUsage);
@@ -30,10 +29,11 @@ public class MeterManager implements Serializable {
     }
 
     public void printMeterList() {
-        if(meterList.isEmpty()){ log.info(String.format("meterList is Empty"));}
-        for(Meter meter : meterList)
-        {
-            log.info(String.format(meter.macAddress + "\n"));
+        if(meterList.isEmpty()){ log.info("meterList is Empty");}
+        else {
+            for (Meter meter : meterList) {
+                log.info(meter.macAddress + "\n");
+            }
         }
     }
 
@@ -44,7 +44,7 @@ public class MeterManager implements Serializable {
             addMeter(macAddress, Integer.toString(this.simulatedEnergyUsage()));
         }
         else {
-            m.Activate();
+            m.activate();
         }
     }
 
@@ -52,7 +52,7 @@ public class MeterManager implements Serializable {
         Meter m = findByMacAddress(macAddress);
         if( m != Meter.NOT_FOUND)
         {
-            m.Deactivate();
+            m.deactivate();
         }
     }
 
@@ -67,14 +67,21 @@ public class MeterManager implements Serializable {
 
     public String getAllMeterData()
     {
-        String allMeterData = new String();
+        StringBuilder allMeterData = new StringBuilder();
 
         for( Meter meter : meterList) {
             //log.info(String.format("METER\n"));
-            allMeterData += meter.macAddress + "," + meter.timeOfLastMeterReading + "," + Timestamp.from(Instant.now()).toString() + "," + meter.powerUsage + ";";
-            //log.info(String.format("%s\n", allMeterData));
+                allMeterData.append(meter.macAddress).append(",").append(meter.timeOfLastMeterReading).append(",").append(Timestamp.from(Instant.now()).toString()).append(",").append(meter.powerUsage).append(";");
+                meter.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString();
+            if(meter.isActive()) {
+                meter.powerUsage = Integer.toString(simulatedEnergyUsage());
+            }
+            else{
+                meter.powerUsage =  "0";
+            }
+            printMeterList();
         }
-        return allMeterData;
+        return allMeterData.toString();
     }
 
     public int simulatedEnergyUsage() {

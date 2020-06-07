@@ -29,9 +29,7 @@ public class Meter implements Serializable {
     public Meter(){this.macAddress = "00:00:00:00:00:00"; this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString(); this.powerUsage = "000000000000"; status = MeterStatus.ACTIVE;}
     public Meter(String macAddressIn, String powerUsage){this.macAddress = macAddressIn; this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString(); this.powerUsage = powerUsage; status = MeterStatus.ACTIVE;}
 
-    public void updateStatus(MeterStatus meterStatus){
-        this.status = meterStatus;
-    }
-    public void Activate() {this.status = MeterStatus.ACTIVE;}
-    public void Deactivate() {this.status = MeterStatus.INACTIVE;}
+    public void activate() {this.status = MeterStatus.ACTIVE;}
+    public void deactivate() {this.status = MeterStatus.INACTIVE;}
+    public boolean isActive() {return this.status == MeterStatus.ACTIVE;}
 }

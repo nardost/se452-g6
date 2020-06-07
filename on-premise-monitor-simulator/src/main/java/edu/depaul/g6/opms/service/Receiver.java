@@ -9,19 +9,10 @@ import org.springframework.data.redis.connection.MessageListener;
 @Slf4j
 public class Receiver implements MessageListener {
 
-    private SignalReaderService readerService;
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
-        /*
-         *TODO
-         * Receive signal and do something with.
-         * (1) Extract mac address.
-         * (2) Extract signal.
-         * (3) Extract timestamp (when to apply the signal).
-         * (4) Apply signal on mac address at timestamp (or immediately).
-         */
-        this.readerService = new SignalReaderService();
+        SignalReaderService readerService = new SignalReaderService();
         readerService.implementSignal(message.toString());
         log.info(String.format("RECEIVED [%s] %s", new String(bytes), message));
     }

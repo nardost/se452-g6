@@ -5,10 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * @author nardos
@@ -30,10 +27,6 @@ public class MeterReaderService {
         this.sender = senderIn;
         this.receiver = receiverIn;
         this.meterManager = MeterManager.getInstance();
-        this.meterManager.addMeter("01-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
-        this.meterManager.addMeter("a1-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
-        this.meterManager.addMeter("b1-23-45-67-89-ab", Integer.toString(this.meterManager.simulatedEnergyUsage()));
-        meterManager.printMeterList();
     }
 
 
