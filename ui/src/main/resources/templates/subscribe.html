@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <label>Exp. Month</label>
                                 <select class="form-control mb-3" th:field="*{mm}" required>
                                     <option value=""></option>
@@ -82,11 +82,11 @@
                                     <option value="12">12 - Dec</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <label>Exp. Year</label>
                                 <input class="form-control mb-3" type="text" th:field="*{yyyy}" placeholder="YYYY" pattern="20[2-9]{1}[0-9]{1}" minlength="4" maxlength="4" required>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <label>CVV</label>
                                 <input class="form-control mb-3" type="text" th:field="*{cvv}" placeholder="CVV" pattern="[0-9]{3,4}" minlength="3" maxlength="4" required>
                             </div>
