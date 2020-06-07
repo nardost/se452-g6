@@ -22,7 +22,7 @@ public class Receiver implements MessageListener {
          * (4) Apply signal on mac address at timestamp (or immediately).
          */
         this.readerService = new SignalReaderService();
-        readerService.doSomethingWithTheReceivedSignal(message.toString());
+        readerService.implementSignal(message.toString());
         log.info(String.format("RECEIVED [%s] %s", new String(bytes), message));
     }
 }
