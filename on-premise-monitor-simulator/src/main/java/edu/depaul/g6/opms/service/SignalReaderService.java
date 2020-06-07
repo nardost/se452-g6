@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class SignalReaderService {
 
     public void doSomethingWithTheReceivedSignal(String signal) {
+        String[] meter = signal.split(";");
+
         log.info("Activating Service: " + signal);
     }
 }

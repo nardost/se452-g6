@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * @author nardos
@@ -24,7 +25,21 @@ public class MeterReaderService {
         this.sender = sender;
     }
 
-    @Scheduled(fixedDelay = 30000) // 30 seconds
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MeterReaderService that = (MeterReaderService) o;
+        return Objects.equals(sender, that.sender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sender);
+    }
+
+    @Scheduled(fixedDelay = 2000)
     public void sendUsageData() {
         /*
          *TODO
