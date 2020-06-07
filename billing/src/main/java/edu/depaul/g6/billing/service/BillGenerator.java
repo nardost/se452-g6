@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -40,10 +41,11 @@ public class BillGenerator {
 
             Bill bill = new Bill();
             bill.setAccountNumber(accountId);
-            bill.setPaid(false);
-            bill.setAmount((int)(usageReport.get(mac) * (category.getTariff() / 100.00)));
+            bill.setPaid(false); // wish there was operator overloading in Java...
+            bill.setAmount(new BigDecimal(usageReport.get(mac)).multiply(new BigDecimal(category.getTariff()).divide(new BigDecimal(100.00))));
             bill.setBillingDate(LocalDate.now());
-            bill.setDueDate(LocalDate.now().plusDays(30));
+            bill.setDueDate(LocalDate.now().minusDays(1));
+            // bill.setDueDate(LocalDate.now().plusDays(30));
             repo.save(bill);
         }
     }

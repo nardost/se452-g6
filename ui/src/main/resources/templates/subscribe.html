@@ -5,7 +5,7 @@
         <header th:replace="fragments :: banner-and-navbar"></header>
         <main class="container">
             <div class="col-lg-9">
-                <form method="post" th:action="@{/subscribe}" th:object="${subscriber}" style="width: 650px;">
+                <form method="post" th:action="@{/subscribe}" th:object="${subscriber}" style="width: 550px;">
                     <fieldset class="form-group">
                         <legend>Subscriber Information</legend>
                         <div class="form-row">
@@ -21,7 +21,7 @@
                         <div class="form-row">
                             <div class="col-md-8 mb-3">
                                 <label>Email</label>
-                                <input type="text" class="form-control" th:field="*{email}" placeholder="Email" required />
+                                <input type="email" class="form-control" th:field="*{email}" placeholder="Email" required />
                             </div>
                         </div>
                         <div class="form-row">
@@ -47,8 +47,8 @@
                                 </select>
                             </div>
                             <div class="col-md-2 mb-3">
-                                <label>Zip Code</label>
-                                <input type="text" class="form-control" th:field="*{zipCode}" placeholder="Zip Code" required />
+                                <label>ZIP Code</label>
+                                <input type="text" class="form-control" th:field="*{zipCode}" placeholder="ZIP Code" required />
                             </div>
                         </div>
                     </fieldset>
