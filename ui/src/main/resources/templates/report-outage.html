@@ -2,42 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments :: head-tag"></head>
     <body>
-        <div th:replace="fragments :: banner-and-navbar" />
-        <div class = "container">
-            <h1 class="display-2">Report an Outage</h1>
-            <form>
-                <fieldset class ="form-group">
-                    <legend>Outage Information</legend>
-                    <div class ="form-row">
-                        <label>Outage Date</label>
-                        <input type = "text" class="form-control" placeholder="MM/DD/YYYY" required />
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class = "container">
+            <h1 class="display-5 mb-4">Detail the outage.</h1>
+            <form style="width: 400px;" method="post" th:action="@{/user/report-outage}">
+                <fieldset class="form-group">
+                    <div style="width: 200px" class="form-row mb-3">
+                        <label style="display: block;" class="mb-2">Outage Date</label>
+                        <input name="datetime" type="datetime-local" required />
                     </div>
-                    <div class ="form-row">
-                        <label>Street Address</label>
-                        <input type = "text" class="form-control" placeholder="Street Address" required />
+                    <div class="form-row">
+                        <label style="display: block;" class="mb-2">Description (optional)</label>
+                        <textarea name="description" rows="10" cols="45"></textarea>
                     </div>
-                    <div class ="form-row">
-                        <label>City</label>
-                        <input type = "text" class="form-control" placeholder="City" required />
-                    </div>
-                    <div class ="form-row">
-                        <label>State</label>
-                        <input type = "text" class="form-control" placeholder="State" required />
-                    </div>
-                    <div class ="form-row">
-                        <label>Zip Code</label>
-                        <input type = "text" class="form-control" placeholder="Zip Code" required />
-                    </div>
-                    <div class ="form-row">
-                        <label>Description</label>
-                        <input type = "text" class="form-control" placeholder="Tell us more about it" required />
-                    </div>
-
                 </fieldset>
-
-                <button type="submit" class="btn btn-primary">Submit Report</button>
+                <button style="margin: 12px 0" type="submit" class="btn btn-primary">Submit Report</button>
             </form>
-
-        </div>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
     </body>
 </html>

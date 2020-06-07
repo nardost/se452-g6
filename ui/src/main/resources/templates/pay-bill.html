@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- a way to include the head fragment without overriding this head... a bit hacky -->
+        <head th:include="fragments :: head-tag"></head>
+        <link href="/styles/index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container" style="flex-flow: column;">
+            <h1 class="display-5 mb-4">Pay a bill.</h1>
+            <form style="width: 350px; text-align: center;" method="post" th:action="@{/user/pay-bill}">
+                <fieldset class="form-group">
+                    <div class="form-row" style="justify-content: center;">
+                        <div class="col-mb-3 mb-3">
+                            <label>Bill ID</label>
+                            <select class="form-control" name="id" required >
+                                <option th:value="${select}" th:inline="text">[[${select}]]</option>
+                                <option th:each="bill : ${bills}" th:value="${bill.id}" th:inline="text">[[${bill.id}]]</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <button style="margin: 0 0 24px 0" type="submit" class="btn btn-primary">Authorize Payment</button>
+                <div class="alert alert-info" role="alert">
+                    Authorizing this payment will charge your credit card on file.
+                </div>
+            </form>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
+</html>

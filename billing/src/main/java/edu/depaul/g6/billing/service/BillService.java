@@ -18,7 +18,7 @@ public class BillService {
         this.repo = repo;
     }
 
-    void setBillAsPaid(Long id) {
+    public void setBillAsPaid(Long id) {
         repo.findById(id).ifPresent((Bill bill) -> {
             bill.setPaid(true);
             repo.save(bill);

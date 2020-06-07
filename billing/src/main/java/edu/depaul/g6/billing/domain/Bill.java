@@ -1,6 +1,7 @@
 package edu.depaul.g6.billing.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.*;
 import lombok.*;
@@ -47,8 +48,8 @@ public class Bill implements Serializable {
     /**
      * The amount due.
      */
-    @Column(name = "amount", nullable = false)
-    private Integer amount;
+    @Column(name = "amount", nullable = false, columnDefinition = "DECIMAL(6,2)")
+    private BigDecimal amount;
 
 
     /**
@@ -56,4 +57,8 @@ public class Bill implements Serializable {
      */
     @Column(name = "paid", columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     private Boolean paid;
+
+
+    public boolean isOverdue() { return !paid && dueDate.isBefore(LocalDate.now()); }
+    public String rowStyling() { return isOverdue() ? "overdue" : (paid ? "paid" : "unpaid"); }
 }
