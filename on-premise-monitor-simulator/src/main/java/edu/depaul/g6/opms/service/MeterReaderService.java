@@ -3,9 +3,9 @@ package edu.depaul.g6.opms.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.util.Objects;
 
 /**
  * @author nardos
@@ -15,23 +15,23 @@ import java.time.Instant;
  * to the Redis message broker on channel "meter-reading".
  */
 @Service
+@Slf4j
 public class MeterReaderService {
 
     private final Sender sender;
+    public MeterManager meterManager;
 
     @Autowired
     public MeterReaderService(Sender sender) {
         this.sender = sender;
+        this.meterManager = MeterManager.getInstance();
     }
 
-    @Scheduled(fixedDelay = 30000) // 30 seconds
+    @Scheduled(fixedDelay = 2000)
     public void sendUsageData() {
-        /*
-         *TODO
-         * This message should be the usage data formatted in some way.
-         * Example: mac-address:from-timestamp:to-timestamp:wattage
-         */
-        final String message = Timestamp.from(Instant.now()).toString();
-        sender.send(message);
+        final String message = meterManager.getUsageDataOfAllActiveMeters();
+        if(message.length() > 0) {
+            sender.send(message);
+        }
     }
 }

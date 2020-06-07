@@ -13,7 +13,6 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
-import java.util.UUID;
 import java.util.concurrent.Executors;
 
 @Configuration
