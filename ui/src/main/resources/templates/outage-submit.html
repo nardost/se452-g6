@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <!-- a way to include the head fragment without overriding this head... a bit hacky -->
         <head th:include="fragments :: head-tag"></head>
@@ -7,8 +9,8 @@
     </head>
     <body>
         <header th:replace="fragments :: banner-and-navbar"></header>
-        <main class="container" style="text-align: center;">
-            <h1 class="text-danger" th:inline="text">[[${status}]] [[${error}]].</h1>
+        <main class="container" style="text-align: center; flex-direction: column;">
+            <h1 th:inline="text" class="mb-4">Sorry for the inconvenience <span sec:authentication="principal.firstName"></span>, we'll look into this.</h1>
         </main>
         <footer th:replace="fragments :: footer"></footer>
     </body>

@@ -3,20 +3,55 @@
     <head th:replace="fragments :: head-tag"></head>
     <body>
         <header th:replace="fragments :: banner-and-navbar"></header>
-        <main class="container">
+        <main class="container" style="position: relative;">
             <h1 class="display-5">Your meter usage.</h1>
+            <div style="position: absolute; right: 0; top: 0;">
+                <label>Items per page:</label>
+                <select onchange="javascript:location.href = this.value;">
+                    <option value=""></option>
+                    <option th:unless="${paging.pageSize == 10}" value="/user/usage?page=0&pageSize=10">10</option>
+                    <option th:unless="${paging.pageSize == 20}" value="/user/usage?page=0&pageSize=20">20</option>
+                    <option th:unless="${paging.pageSize == 30}" value="/user/usage?page=0&pageSize=30">30</option>
+                </select>
+            </div>
             <table class="table table-striped">
                 <tr>
                     <th>From</th>
                     <th>To</th>
                     <th>kWh Used</th>
                 </tr>
-                <tr th:each="usageData : ${meter.usage}">
+                <tr th:each="usageData : ${paginated}">
                     <td th:text="${#temporals.format(T(java.time.Instant).parse(usageData.from), 'MMM d, yyyy HH:mm:ss', #locale)}"></td>
                     <td th:text="${#temporals.format(T(java.time.Instant).parse(usageData.to), 'MMM d, yyyy HH:mm:ss', #locale)}"></td>
                     <td th:text="${usageData.kwhUsed}"></td>
                 </tr>
             </table>
+            <nav style="position: absolute; right: 15px">
+                <ul class="pagination" style="flex-wrap: wrap;">
+                    <li class="page-item" th:classappend="${paging.hasPrevious() ? '' : 'disabled'}">
+                        <a class="page-link"
+                           th:href="@{|/user/usage?page=${paging.currentPage - 1}&pageSize=${paging.pageSize}|}">
+                            Previous
+                        </a>
+                    </li>
+                    <th:block th:each="i : ${#numbers.sequence(0, paging.NumPages - 1)}">
+                        <li style="width: 35px" class="page-item" th:classappend="${paging.currentPage == i ? 'active' : ''}">
+                            <a class="page-link"
+                               th:href="@{|/user/usage?page=${i}&pageSize=${paging.pageSize}|}"
+                               th:inline="text"
+                            >
+                                [[${i + 1}]]
+                            </a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${paging.hasNext() ? '' : 'disabled'}">
+                        <a class="page-link"
+                           th:href="@{|/user/usage?page=${paging.currentPage + 1}&pageSize=${paging.pageSize}|}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </main>
         <footer th:replace="fragments :: footer"></footer>
     </body>

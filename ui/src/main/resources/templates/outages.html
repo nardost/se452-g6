@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head-tag"></head>
-<body>
-    <div th:replace="fragments :: banner-and-navbar" />
-        <div class="container">
-            <div class = "outage-report">
-                <h1 class="display-name" >Outage Reports</h1>
-                <h2 th:inline="text">[[${#lists.size(reports)}]] Outages found</h2>
-                <table class="table altered">
+    <head th:replace="fragments :: head-tag"></head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container" style="position: relative;">
+            <div class="outage-report">
+                <h1 class="display-5" th:inline="text">[[${#lists.size(reports)}]] outage[[${#lists.size(reports) != 1 ? "s" : ""}]] found.</h1>
+                <table class="table table-striped">
                     <tr>
-                        <th>Outage Date</th>
-                        <th>Street Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip Code</th>
-                        <th>Active Outage</th>
+                        <th>Account #</th>
+                        <th>Datetime</th>
                         <th>Comments</th>
                     </tr>
                     <tr th:each="report : ${reports}">
-                        <td th:text="${report.outageDate}"></td>
-                        <td th:text="${report.streetAddress}"></td>
-                        <td th:text="${report.city}"></td>
-                        <td th:text="${report.state}"></td>
-                        <td th:text="${report.zipCode}"></td>
-                        <td th:text="${report.activeOutage}"></td>
-                        <td th:text="${report.comment}"></td>
+                        <td th:text="${report.accountId}"></td>
+                        <td th:text="${report.outageDatetime}"></td>
+                        <td th:text="${report.description}"></td>
                     </tr>
                 </table>
-                <a href="/report-outage">
-                <button type="submit" class="btn btn-primary">Report an Outage</button>
-                </a>
             </div>
-        </div>
-    <div th:replace="fragments :: footer"></div>
-</body>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
 </html>

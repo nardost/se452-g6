@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <!-- a way to include the head fragment without overriding this head... a bit hacky -->
+        <head th:include="fragments :: head-tag"></head>
+        <link href="/styles/index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header th:replace="fragments :: banner-and-navbar"></header>
+        <main class="container" style="text-align: center; flex-direction: column;">
+            <h1 th:inline="text" class="mb-4">Thank you <span sec:authentication="principal.firstName"></span>, your bill has been paid.</h1>
+            <h3 th:inline="text">Confirmation #[[${id}]]</h3>
+        </main>
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
+</html>

@@ -61,7 +61,7 @@ create table subscriptions (
 create table bills (
     id serial primary key,
     account_number varchar(10) not null,
-    amount integer not null,
+    amount decimal(6,2) not null,
     billing_date date default current_date,
     due_date date not null,
     paid boolean default false

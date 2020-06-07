@@ -17,23 +17,21 @@
         window.onload = () => {
             let boltUnhovered = document.getElementById('boltUnhovered');
             let boltHovered   = document.getElementById('boltHovered');
-            let hoveredDisplayed = false;
 
-            function toggleBolt() {
-                if (!hoveredDisplayed) {
+            function toggleBolt(hovering) {
+                if (hovering) {
                     boltUnhovered.style.display = 'none';
                     boltHovered.style.display   = 'inline-block';
-                    hoveredDisplayed = true;
                 }
                 else {
                     boltUnhovered.style.display = 'inline-block';
                     boltHovered.style.display   = 'none';
-                    hoveredDisplayed = false;
                 }
             }
 
             let home = document.getElementById('home');
-            home.onmouseenter = toggleBolt; home.onmouseleave = toggleBolt;
+            home.onmouseenter = () => { toggleBolt(true) };
+            home.onmouseleave = () => { toggleBolt(false) };
         }
     </script>
 
@@ -42,6 +40,9 @@
             text-transform: uppercase;
             font-variant: small-caps;
         }
+
+        #home a { display: inline-flex; align-items: center; }
+        #home a span { margin-left: 15px; }
     </style>
 </head>
 
@@ -85,71 +86,70 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li sec:authorize="hasRole('USER')" class="nav-item pr-3">
-                            <a class="nav-link" href="/outages">
-                                    <span style="font-size: 1.3em">
-                                        <i class="fas fa-exclamation-triangle"></i> Outages
-                                    </span>
+                            <a class="nav-link" href="/user/report-outage">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-exclamation-triangle"></i> Report Outage
+                                </span>
                             </a>
                         </li>
                         <li sec:authorize="hasRole('USER')" class="nav-item pr-3">
-                            <a class="nav-link" href="/pay-bill">
-                                    <span style="font-size: 1.3em">
-                                        <i class="fas fa-file-invoice-dollar"></i> Pay Bill
-                                    </span>
+                            <a class="nav-link" href="/user/pay-bill">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-file-invoice-dollar"></i> Pay Bill
+                                </span>
                             </a>
                         </li>
                         <li sec:authorize="hasRole('USER')" class="nav-item pr-3 dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span style="font-size: 1.3em">
-                                        <i class="fas fa-house-user"></i> My Account
-                                    </span>
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-house-user"></i> My Account
+                                </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/user/account-details">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-id-card"></i> Profile
-                                        </span>
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-id-card"></i> Profile
+                                    </span>
                                 </a>
                                 <a class="dropdown-item" href="/user/bills">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-file-invoice-dollar"></i> Bills
-                                        </span>
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-file-invoice-dollar"></i> Bills
+                                    </span>
                                 </a>
                                 <a class="dropdown-item" href="/user/usage">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-tachometer-alt"></i> Usage
-                                        </span>
-                                </a>
-                                <a class="dropdown-item" href="/user/moving">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-dolly"></i> Moving
-                                        </span>
+                                    <span style="font-size: 1.3em">
+                                        <i class="fas fa-tachometer-alt"></i> Usage
+                                    </span>
                                 </a>
                             </div>
                         </li>
-                        <li sec:authorize="hasRole('ADMIN')" class="nav-item pr-3 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span style="font-size: 1.3em">
-                                        <i class="fas fa-user-lock"></i> Facilities Management
-                                    </span>
+                        <li sec:authorize="hasRole('ADMIN')" class="nav-item pr-3">
+                            <a class="nav-link" href="/admin/outages">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-exclamation-triangle"></i> Outage Reports
+                                </span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="adminDropDownMenu">
-                                <a class="dropdown-item" href="/admin/locations">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-map-marker-alt"></i> Service Addresses List
-                                        </span>
-                                </a>
-                                <a class="dropdown-item" href="/admin/service-categories">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-users-cog"></i> Service Categories
-                                        </span>
-                                </a>
-                                <a class="dropdown-item" href="/admin/subscriptions">
-                                        <span style="font-size: 1.3em">
-                                            <i class="fas fa-tools"></i> Subscriptions
-                                        </span>
-                                </a>
-                            </div>
+                        </li>
+                        <li sec:authorize="hasRole('ADMIN')" class="nav-item pr-3">
+                            <a class="nav-link" href="/admin/locations">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-map-marker-alt"></i> Service Addresses
+                                </span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasRole('ADMIN')" class="nav-item pr-3">
+                            <a class="nav-link" href="/admin/service-categories">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-users-cog"></i> Service Categories
+                                </span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasRole('ADMIN')" class="nav-item pr-3">
+                            <a class="nav-link" href="/admin/subscriptions">
+                                <span style="font-size: 1.3em">
+                                    <i class="fas fa-tools"></i> Subscriptions
+                                </span>
+                            </a>
                         </li>
                         <li class="nav-item" style="position: absolute; right: 10px;">
                             <a href="/logout">

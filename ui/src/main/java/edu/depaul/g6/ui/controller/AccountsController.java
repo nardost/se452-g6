@@ -1,6 +1,8 @@
 package edu.depaul.g6.ui.controller;
 
+import edu.depaul.g6.accounts.domain.Report;
 import edu.depaul.g6.accounts.repository.AccountRepository;
+import edu.depaul.g6.accounts.repository.OutageReportRepository;
 import edu.depaul.g6.accounts.service.Accounts;
 import edu.depaul.g6.accounts.domain.Account;
 import edu.depaul.g6.accounts.domain.Subscriber;
@@ -21,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -58,16 +61,33 @@ public class AccountsController {
         return "index";
     }
 
-    @GetMapping("/outages")
-    public String outageReport(Model model) {
-        model.addAttribute("reports", accounts.getAllReports());
-        return "outages";
-    }
+    @Autowired
+    OutageReportRepository outageRepo; // someone can refactor this if they have the ambition
 
-    @GetMapping("/report-outage")
+    @GetMapping("/user/report-outage")
     public String reportOutage(Model model) {
         return "report-outage";
     }
+
+    @PostMapping("/user/report-outage")
+    public String reportOutage(
+            @RequestParam String datetime,
+            @RequestParam String description,
+            @AuthenticationPrincipal G6UserPrincipal user
+    )
+    {
+        Report newOutage = new Report(user.getAccountId(), datetime, description);
+        outageRepo.save(newOutage);
+        return "outage-submit";
+    }
+
+
+    @GetMapping("/admin/outages") String outages(Model model) {
+        List<Report> reports = outageRepo.findAll();
+        model.addAttribute("reports", reports);
+        return "outages";
+    }
+
 
     @GetMapping("/subscribe")
     public String showSubscriptionForm(Model model) {
