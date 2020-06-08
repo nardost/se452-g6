@@ -18,14 +18,25 @@ import java.util.Map;
 @Slf4j
 @Service
 public class BillGenerator {
-    @Autowired
-    ServiceProxyService service;
+
+    private ServiceProxyService service;
+    private Facilities facilities;
+    private BillRepository repo;
 
     @Autowired
-    Facilities facilities;
+    public void setServiceProxyService(ServiceProxyService service) {
+        this.service = service;
+    }
 
     @Autowired
-    BillRepository repo;
+    public void setFacilities(Facilities facilities) {
+        this.facilities = facilities;
+    }
+
+    @Autowired
+    public void setBillRepository(BillRepository repository) {
+        this.repo = repository;
+    }
 
     @Scheduled(fixedDelay = 60000) // every min
     void generateBill() {
@@ -44,8 +55,8 @@ public class BillGenerator {
             bill.setPaid(false); // wish there was operator overloading in Java...
             bill.setAmount(new BigDecimal(usageReport.get(mac)).multiply(new BigDecimal(category.getTariff()).divide(new BigDecimal(100.00))));
             bill.setBillingDate(LocalDate.now());
-            bill.setDueDate(LocalDate.now().minusDays(1));
-            // bill.setDueDate(LocalDate.now().plusDays(30));
+            //bill.setDueDate(LocalDate.now().minusDays(1));
+            bill.setDueDate(LocalDate.now().plusDays(30));
             repo.save(bill);
         }
     }
