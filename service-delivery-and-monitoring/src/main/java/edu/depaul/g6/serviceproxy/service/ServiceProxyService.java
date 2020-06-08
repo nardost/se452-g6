@@ -15,7 +15,8 @@ import edu.depaul.g6.serviceproxy.repository.ServiceProxyRepository;
 
 @Service
 public class ServiceProxyService {
-    private ServiceProxyRepository repo;
+
+    private final ServiceProxyRepository repo;
 
     @Autowired
     ServiceProxyService(ServiceProxyRepository repository) {
@@ -28,7 +29,7 @@ public class ServiceProxyService {
      * @return Map from mac address -> kWh usage since the last invocation.
      */
     public Map<String, Integer> getUsageReport() {
-        Map<String, Integer> usageReport = new HashMap<String, Integer>();
+        Map<String, Integer> usageReport = new HashMap<>();
         List<ServiceProxy> meters = repo.findAll();
 
         for (ServiceProxy meter : meters)

@@ -17,11 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class G6UserDetailsService implements UserDetailsService {
-    @Autowired
-    private AccountRepository accountRepository;
+
+    private final AccountRepository accountRepository;
+    private final SubscriberRepository subscriberRepository;
 
     @Autowired
-    private SubscriberRepository subscriberRepository;
+    public G6UserDetailsService(
+            AccountRepository aRepo,
+            SubscriberRepository sRepo) {
+        this.accountRepository = aRepo;
+        this.subscriberRepository = sRepo;
+    }
 
 
     @Override

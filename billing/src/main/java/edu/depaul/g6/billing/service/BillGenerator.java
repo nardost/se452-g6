@@ -18,16 +18,34 @@ import java.util.Map;
 @Slf4j
 @Service
 public class BillGenerator {
-    @Autowired
-    ServiceProxyService service;
+
+    private ServiceProxyService service;
+    private Facilities facilities;
+    private BillRepository repo;
+    private final static long BILLING_FREQUENCY = 60000L;
 
     @Autowired
-    Facilities facilities;
+    public void setServiceProxyService(ServiceProxyService service) {
+        this.service = service;
+    }
 
     @Autowired
-    BillRepository repo;
+    public void setFacilities(Facilities facilities) {
+        this.facilities = facilities;
+    }
 
-    @Scheduled(fixedDelay = 60000) // every min
+    @Autowired
+    public void setBillRepository(BillRepository repository) {
+        this.repo = repository;
+    }
+
+    /*
+     * Generates every few seconds just for demonstration.
+     * In reality, this would be a cron trigger. For example,
+     * At the stroke of midnight on the 21st of every month.
+     * @Scheduled(cron = "0 0 0 21 * ?")
+     */
+    @Scheduled(fixedDelay = BILLING_FREQUENCY)
     void generateBill() {
         Map<String, Integer> usageReport = service.getUsageReport(); // mac address -> kWh since last invocation
 
@@ -44,8 +62,11 @@ public class BillGenerator {
             bill.setPaid(false); // wish there was operator overloading in Java...
             bill.setAmount(new BigDecimal(usageReport.get(mac)).multiply(new BigDecimal(category.getTariff()).divide(new BigDecimal(100.00))));
             bill.setBillingDate(LocalDate.now());
-            bill.setDueDate(LocalDate.now().minusDays(1));
-            // bill.setDueDate(LocalDate.now().plusDays(30));
+            /*
+             * Expire the due date for demonstration.
+             */
+            //bill.setDueDate(LocalDate.now().minusDays(1));
+            bill.setDueDate(LocalDate.now().plusDays(30));
             repo.save(bill);
         }
     }

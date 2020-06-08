@@ -10,7 +10,9 @@ import java.util.Collections;
 
 
 public class G6AdminPrincipal implements UserDetails {
-    private Account account;
+
+    private final Account account;
+
     G6AdminPrincipal(Account account) { this.account = account; }
 
 

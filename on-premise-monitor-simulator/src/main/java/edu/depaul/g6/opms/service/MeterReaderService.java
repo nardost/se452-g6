@@ -5,8 +5,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
-
 /**
  * @author nardos
  *TODO:
@@ -19,7 +17,8 @@ import java.util.Objects;
 public class MeterReaderService {
 
     private final Sender sender;
-    public MeterManager meterManager;
+    private final MeterManager meterManager;
+    private final static long PUBLISHING_FREQUENCY = 5000L;
 
     @Autowired
     public MeterReaderService(Sender sender) {
@@ -27,7 +26,13 @@ public class MeterReaderService {
         this.meterManager = MeterManager.getInstance();
     }
 
-    @Scheduled(fixedDelay = 2000)
+    /*
+     * Publishes usage data to message broker every
+     * few seconds for demonstration only.
+     * In reality, the frequency would be lower than this,
+     * like once every hour or so.
+     */
+    @Scheduled(fixedDelay = PUBLISHING_FREQUENCY)
     public void sendUsageData() {
         final String message = meterManager.getUsageDataOfAllActiveMeters();
         if(message.length() > 0) {

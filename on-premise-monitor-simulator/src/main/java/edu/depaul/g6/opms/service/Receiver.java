@@ -12,7 +12,7 @@ public class Receiver implements MessageListener {
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
-        log.info(String.format("RECEIVED [%s] %s", new String(bytes), message));
+        log.info(String.format("RECEIVED FROM [%s] %s", new String(bytes), message));
         executeSignal(message.toString());
     }
 }

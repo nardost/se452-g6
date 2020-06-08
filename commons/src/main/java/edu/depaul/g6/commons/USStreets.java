@@ -1,6 +1,8 @@
 package edu.depaul.g6.commons;
 
 /**
+ * @author nardos
+ * Currently not used.
  * Sources:
  * (1) https://en.wikipedia.org/wiki/Street_suffix
  * (2) https://pe.usps.com/text/pub28/28apc_003.htm#ep538629

@@ -21,16 +21,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 public class BillingController {
-    @Autowired
-    BillRepository repo;
+
+    private final BillRepository billRepository;
+    private final BillService billService;
 
     @Autowired
-    BillService service;
+    public BillingController(BillRepository billRepository, BillService billService) {
+        this.billRepository = billRepository;
+        this.billService = billService;
+    }
 
 
     @GetMapping("/user/bills")
     public String bills(Model model, @AuthenticationPrincipal G6UserPrincipal user) {
-        List<Bill> bills = repo.findAllByAccountNumber(user.getAccountId());
+        List<Bill> bills = billRepository.findAllByAccountNumber(user.getAccountId());
         model.addAttribute("bills", bills);
         return "bills";
     }
@@ -38,7 +42,7 @@ public class BillingController {
 
     @GetMapping("/user/pay-bill")
     public String passwordReset(Model model, @RequestParam(defaultValue = "") String id, @AuthenticationPrincipal G6UserPrincipal user) {
-        List<Bill> bills = repo.findAllByAccountNumber(user.getAccountId());
+        List<Bill> bills = billRepository.findAllByAccountNumber(user.getAccountId());
         bills.removeIf(b -> b.getPaid() || (!id.equals("") && b.getId() == Long.parseLong(id))); // remove paid bills
         model.addAttribute("bills", bills);
         model.addAttribute("select", id);
@@ -48,7 +52,7 @@ public class BillingController {
 
     @PostMapping("/user/pay-bill")
     public String payBill(Model model, @RequestParam String id) {
-        service.setBillAsPaid(Long.parseLong(id));
+        billService.setBillAsPaid(Long.parseLong(id));
         model.addAttribute("id", id);
         return "bill-paid";
     }
