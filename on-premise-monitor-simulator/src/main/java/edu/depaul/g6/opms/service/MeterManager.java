@@ -84,11 +84,11 @@ public class MeterManager implements Serializable {
                         .append(",")
                         .append(meter.timeOfLastMeterReading)
                         .append(",")
-                        .append(Timestamp.from(Instant.now()).toString())
+                        .append(Instant.now().toString())
                         .append(",")
                         .append(meter.powerUsage)
                         .append(";");
-                meter.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString();
+                meter.timeOfLastMeterReading = Instant.now().toString();
                 meter.powerUsage = Integer.toString(simulatedEnergyUsage());
             }
         }

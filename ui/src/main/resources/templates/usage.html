@@ -26,6 +26,7 @@
                     <td th:text="${usageData.kwhUsed}"></td>
                 </tr>
             </table>
+            <p style="position: absolute; left: 15px; font-size: 1.2em;" th:inline="text">Page [[${paging.currentPage + 1}]]</p>
             <nav style="position: absolute; right: 15px">
                 <ul class="pagination" style="flex-wrap: wrap;">
                     <li class="page-item" th:classappend="${paging.hasPrevious() ? '' : 'disabled'}">
@@ -34,7 +35,7 @@
                             Previous
                         </a>
                     </li>
-                    <th:block th:each="i : ${#numbers.sequence(0, paging.NumPages - 1)}">
+                    <th:block th:unless="${paging.numPages > 5}" th:each="i : ${#numbers.sequence(0, paging.numPages - 1)}">
                         <li style="width: 35px" class="page-item" th:classappend="${paging.currentPage == i ? 'active' : ''}">
                             <a class="page-link"
                                th:href="@{|/user/usage?page=${i}&pageSize=${paging.pageSize}|}"

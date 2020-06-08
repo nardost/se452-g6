@@ -30,19 +30,19 @@ public class Receiver implements MessageListener {
 
     @Override
     public void onMessage(Message message, byte[] pattern) { // pattern is whatever matched the channel
-        Random r = new Random();
+//        Random r = new Random();
+//
+//        // MOCKUP
+//        String mockup = "";
+//        for (String meter : meters) {
+//            mockup += String.format("%s,%s,%s,%d;", meter, Instant.now().minus(1, ChronoUnit.SECONDS),
+//                                    Instant.now(), r.nextInt(1000));
+//        }
 
-        // MOCKUP
-        String mockup = "";
-        for (String meter : meters) {
-            mockup += String.format("%s,%s,%s,%d;", meter, Instant.now().minus(1, ChronoUnit.SECONDS),
-                                    Instant.now(), r.nextInt(1000));
-        }
+        log.info(String.format("RECEIVED FROM [%s] %s", new String(message.getChannel()), message));
 
-        // log.info(String.format("RECEIVED FROM [%s] %s", new String(message.getChannel()), mockup));
-
-        byte[] array = mockup.getBytes();
-        String[] meters = new String(array).split(";");
+        // byte[] array = mockup.getBytes();
+        String[] meters = new String(message.getBody()).split(";");
 
         for (String meter : meters) {
             String[] components = meter.split(",");

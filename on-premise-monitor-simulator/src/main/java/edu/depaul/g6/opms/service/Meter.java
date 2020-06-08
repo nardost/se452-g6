@@ -20,13 +20,13 @@ public class Meter implements Serializable {
 
     public Meter() {
         this.macAddress = "00:00:00:00:00:00";
-        this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString();
+        this.timeOfLastMeterReading = Instant.now().toString();
         this.powerUsage = "000000000000";
         status = MeterStatus.ACTIVE;
     }
     public Meter(String macAddressIn, String powerUsage) {
         this.macAddress = macAddressIn;
-        this.timeOfLastMeterReading = Timestamp.from(Instant.now()).toString();
+        this.timeOfLastMeterReading = Instant.now().toString();
         this.powerUsage = powerUsage;
         status = MeterStatus.ACTIVE;
     }

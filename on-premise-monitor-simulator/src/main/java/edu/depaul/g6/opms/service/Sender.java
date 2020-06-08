@@ -24,6 +24,6 @@ public class Sender {
     public void send(String message) {
         final String channel = channelTopic.getTopic();
         redisTemplate.convertAndSend(channel, message);
-        log.info(String.format("SENT [%s] %s", channel, message));
+        log.info(String.format("SENT TO [%s] %s", channel, message));
     }
 }
