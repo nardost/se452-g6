@@ -3,8 +3,6 @@ package edu.depaul.g6.payment.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class Payment {
 

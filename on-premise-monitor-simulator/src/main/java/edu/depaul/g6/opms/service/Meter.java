@@ -1,7 +1,6 @@
 package edu.depaul.g6.opms.service;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.Instant;
 
 public class Meter implements Serializable {

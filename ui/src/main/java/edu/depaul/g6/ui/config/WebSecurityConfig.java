@@ -16,8 +16,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final G6UserDetailsService userDetailsService;
+
     @Autowired
-    private G6UserDetailsService userDetailsService;
+    public WebSecurityConfig(G6UserDetailsService service) {
+        this.userDetailsService = service;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

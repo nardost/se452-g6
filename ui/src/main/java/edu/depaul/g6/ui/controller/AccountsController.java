@@ -39,30 +39,31 @@ public class AccountsController {
     private String applicationName;
 
     private final Accounts accounts;
-    private Facilities facilities;
+    private final Facilities facilities;
+    private final Utilities utilities;
+    private final AccountRepository accountRepository;
+    private final OutageReportRepository outageRepository;
 
     @Autowired
-    private Utilities utilities;
+    public AccountsController(
+            Accounts accounts,
+            Utilities utilities,
+            Facilities facilities,
+            AccountRepository accountRepository,
+            OutageReportRepository outageRepository) {
 
-    @Autowired
-    public AccountsController(Accounts accounts){
         this.accounts = accounts;
+        this.utilities = utilities;
+        this.facilities = facilities;
+        this.accountRepository = accountRepository;
+        this.outageRepository = outageRepository;
     }
-
-    @Autowired
-    public void setFacilities(Facilities f) {
-        this.facilities = f;
-    }
-
 
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("applicationName", applicationName);
         return "index";
     }
-
-    @Autowired
-    OutageReportRepository outageRepo; // someone can refactor this if they have the ambition
 
     @GetMapping("/user/report-outage")
     public String reportOutage(Model model) {
@@ -77,13 +78,13 @@ public class AccountsController {
     )
     {
         Report newOutage = new Report(user.getAccountId(), datetime, description);
-        outageRepo.save(newOutage);
+        outageRepository.save(newOutage);
         return "outage-submit";
     }
 
 
     @GetMapping("/admin/outages") String outages(Model model) {
-        List<Report> reports = outageRepo.findAll();
+        List<Report> reports = outageRepository.findAll();
         model.addAttribute("reports", reports);
         return "outages";
     }
@@ -135,10 +136,6 @@ public class AccountsController {
     public String logout() {
         return "logout";
     }
-
-
-    @Autowired
-    private AccountRepository accountRepository;
 
     @GetMapping("/password-reset")
     public String passwordReset(@AuthenticationPrincipal UserDetails user, Model model) {

@@ -16,6 +16,7 @@
 g6-utilities
     ├── accounts
     ├── billing
+    ├── commons
     ├── facilities
     ├── on-premise-monitor-simulator
     ├── payment
@@ -33,20 +34,33 @@ g6-utilities
     ## List of Environment Variables
     ```
      1. SPRING_PROFILES_ACTIVE
-     2. MONGODB_AUTHENTICATION_DB_LOCAL
-     3. MONGODB_HOST_LOCAL
-     4. MONGODB_PORT_LOCAL
-     5. MONGODB_DATABASE_LOCAL
-     6. MONGODB_USERNAME_LOCAL
-     7. MONGODB_PASSWORD_LOCAL
-     8. POSTGRES_URL_AWS
-     9. POSTGRES_PORT_AWS
-    10. POSTGRES_DB_AWS
-    11. POSTGRES_USERNAME_AWS
-    12. POSTGRES_PASSWORD_AWS
-    13. MONGODB_USERNAME_ATLAS
-    14. MONGODB_PASSWORD_ATLAS
-    15. MONGODB_CLUSTER_URI_ATLAS
+     2. POSTGRES_URI_LOCAL
+     3. POSTGRES_PORT_LOCAL
+     4. POSTGRES_DB_LOCAL
+     5. POSTGRES_USERNAME_LOCAL
+     6. POSTGRES_PASSWORD_LOCAL
+     7. POSTGRES_URI_AWS
+     8. POSTGRES_PORT_AWS
+     9. POSTGRES_DB_AWS
+    10. POSTGRES_USERNAME_AWS
+    11. POSTGRES_PASSWORD_AWS
+    12. MONGODB_AUTHENTICATION_DB_LOCAL
+    13. MONGODB_HOST_LOCAL
+    14. MONGODB_PORT_LOCAL
+    15. MONGODB_DATABASE_LOCAL
+    16. MONGODB_USERNAME_LOCAL
+    17. MONGODB_PASSWORD_LOCAL
+    18. MONGODB_USERNAME_ATLAS
+    19. MONGODB_PASSWORD_ATLAS
+    20. MONGODB_CLUSTER_URI_ATLAS
+    21. REDIS_LOCAL_HOST
+    22. REDIS_LOCAL_PORT
+    23. REDIS_LOCAL_PASSWORD
+    24. REDIS_CLOUD_HOST
+    25. REDIS_CLOUD_PORT
+    26. REDIS_CLOUD_PASSWORD
+    27. SSL_KEYSTORE_PASSWORD
+    28. SSL_KEY_PASSWORD
     ```
 
    Examples:
@@ -87,9 +101,12 @@ g6-utilities
 
    ```$ mvn clean package```
 
-4. Execute the jar file
+4. Execute the two executable jar files on separate terminal windows
 
-   ```$ java -jar ui/target/ui-1.0-SNAPSHOT.jar```
+   ```
+   $ java -jar ui/target/ui-1.0-SNAPSHOT.jar
+   $ java -jar on-premise-monitor-simulator/target/on-premise-monitor-simulator-1.0-SNAPSHOT.jar
+   ```
 
 5. Run the application
 

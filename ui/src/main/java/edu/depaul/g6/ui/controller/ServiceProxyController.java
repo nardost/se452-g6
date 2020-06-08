@@ -24,12 +24,20 @@ import java.util.List;
 @Slf4j
 @Controller
 public class ServiceProxyController {
+
+    private final ServiceProxyRepository serviceRepo;
+    private final SubscriptionRepository subscriptionRepo;
     @Autowired
-    private ServiceProxyRepository serviceRepo;
+    ConversionService conversionService;
 
     @Autowired
-    private SubscriptionRepository subscriptionRepo;
+    public ServiceProxyController(
+            ServiceProxyRepository proxyRepo,
+            SubscriptionRepository subRepo) {
 
+        this.serviceRepo = proxyRepo;
+        this.subscriptionRepo = subRepo;
+    }
 
     /** Wrote my own custom paging. I couldn't use Spring's because we have an embedded document... shame.
      */
@@ -53,9 +61,6 @@ public class ServiceProxyController {
         model.addAttribute("paging", paging);
         return "usage";
     }
-
-    @Autowired
-    ConversionService conversionService;
 
     private int getNumPages(int listSize, PageSize pageSize) {
         // divide the list by the page size, round up

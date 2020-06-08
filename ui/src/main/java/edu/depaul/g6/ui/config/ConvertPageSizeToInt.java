@@ -2,7 +2,6 @@ package edu.depaul.g6.ui.config;
 
 import org.springframework.core.convert.converter.Converter;
 
-
 public class ConvertPageSizeToInt implements Converter<PageSize, Integer> {
     @Override
     public Integer convert(PageSize value) {
