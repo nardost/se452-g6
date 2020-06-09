@@ -18,6 +18,7 @@ import edu.depaul.g6.facilities.repository.SubscriptionRepository;
 import edu.depaul.g6.ui.config.G6UserPrincipal;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.lang.Math;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,14 +49,26 @@ public class ServiceProxyController {
             @RequestParam(defaultValue = "0") int page,
             @AuthenticationPrincipal G6UserPrincipal user)
     {
-        Subscription subscription = subscriptionRepo.findById(user.getAccountId()).get();
-        ServiceProxy service = serviceRepo.findById(subscription.getLocation().getMeterMacAddress()).get();
+        Subscription subscription = null;
+        if(subscriptionRepo.findById(user.getAccountId()).isPresent()) {
+            subscription = subscriptionRepo.findById(user.getAccountId()).get();
+        }
+        ServiceProxy service = null;
+        Paging paging = new Paging(0,0,0);
+        List<Usage> paginated = new ArrayList<>();
+        if(subscription != null &&
+                serviceRepo.findById(subscription.getLocation().getMeterMacAddress()).isPresent()) {
+            service = serviceRepo.findById(subscription.getLocation().getMeterMacAddress()).get();
+        }
 
-        int numPages = getNumPages(service.getUsage().size(), pageSize);
-        page = sanitizePage(page, numPages);
-
-        Paging paging = new Paging(numPages, page, conversionService.convert(pageSize, Integer.class));
-        List<Usage> paginated = getSubList(paging, service.getUsage());
+        if(service != null) {
+            int numPages = getNumPages(service.getUsage().size(), pageSize);
+            page = sanitizePage(page, numPages);
+            Integer i = conversionService.convert(pageSize, Integer.class);
+            i = (i == null) ? 0 : i;
+            paging = new Paging(numPages, page, i);
+            paginated = getSubList(paging, service.getUsage());
+        }
 
         model.addAttribute("paginated", paginated);
         model.addAttribute("paging", paging);
@@ -64,7 +77,9 @@ public class ServiceProxyController {
 
     private int getNumPages(int listSize, PageSize pageSize) {
         // divide the list by the page size, round up
-        return (int) Math.ceil(listSize / conversionService.convert(pageSize, Integer.class).doubleValue());
+        Integer d = conversionService.convert(pageSize, Integer.class);
+        d = (d == null) ? 0 : d;
+        return (int) Math.ceil(listSize / d.doubleValue());
     }
 
 
